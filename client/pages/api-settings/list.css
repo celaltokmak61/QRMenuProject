@@ -1,0 +1,210 @@
+/* =============================================
+   API Ayarları — list.css
+   FAZA 13
+   ============================================= */
+
+/* Ana İçerik */
+.main-content {
+    padding: 30px;
+    background: #f8f9fa;
+    min-height: calc(100vh - 60px);
+}
+
+.content-wrapper {
+    max-width: 1200px;
+}
+
+/* İstatistik Kartları */
+.stat-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    border: 1px solid #e9ecef;
+    transition: box-shadow .2s;
+}
+
+.stat-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,.10);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    width: 52px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.stat-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #2c3e50;
+}
+
+.stat-label {
+    font-size: .8rem;
+    color: #6c757d;
+    margin-top: 4px;
+}
+
+/* Tablo */
+#keysTable th {
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #6c757d;
+    white-space: nowrap;
+}
+
+.key-display {
+    flex-wrap: nowrap;
+}
+
+.key-text {
+    font-size: .8rem;
+    background: #f0f3f7;
+    border-radius: 4px;
+    padding: 2px 6px;
+    max-width: 280px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: default;
+    color: #495057;
+}
+
+/* Durum badge */
+.status-badge {
+    font-size: .72rem;
+    padding: 3px 8px;
+}
+
+/* Boş durum */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: #fff;
+    border-radius: 12px;
+    border: 2px dashed #dee2e6;
+    color: #6c757d;
+}
+
+.empty-state h4 {
+    margin-top: 12px;
+    color: #495057;
+}
+
+/* API Dokümantasyon */
+.api-docs {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.04);
+}
+
+.api-docs h5 {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.doc-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 16px;
+    border: 1px solid #e9ecef;
+    height: 100%;
+}
+
+.doc-card h6 {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #344;
+}
+
+.code-block {
+    background: #1e2433;
+    color: #a8d8a8;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: .78rem;
+    margin: 0;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+/* Endpoint listesi */
+.doc-endpoints {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.doc-endpoints li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: .82rem;
+}
+
+.doc-endpoints code {
+    font-size: .78rem;
+    background: #e9ecef;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #495057;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 260px;
+    display: inline-block;
+}
+
+/* HTTP Metod renkleri */
+.method {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 4px;
+    font-size: .72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    font-family: monospace;
+}
+
+.method.get    { background: #d4edda; color: #155724; }
+.method.post   { background: #cce5ff; color: #004085; }
+.method.put    { background: #fff3cd; color: #856404; }
+.method.delete { background: #f8d7da; color: #721c24; }
+
+/* Status kodları */
+.status-codes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.status-codes li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+    font-size: .82rem;
+    color: #495057;
+}
+
+/* Toast rengi */
+#actionToast.bg-success { --bs-bg-opacity: 1; }
+#actionToast.bg-danger  { --bs-bg-opacity: 1; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-content { padding: 15px; }
+    .key-text { max-width: 120px; }
+    .doc-endpoints code { max-width: 160px; }
+}

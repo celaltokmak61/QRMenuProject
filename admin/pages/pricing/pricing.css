@@ -1,0 +1,203 @@
+/* ==============================================
+   Fiyatlandırma Ayarları Sayfası Stilleri
+   - Form stilleri
+   - Kart tasarımları
+   - Fiyat önizleme
+============================================== */
+
+/* Main Content Area */
+.main-content {
+    padding-top: 70px; /* Navbar yüksekliği kadar */
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+/* Sayfa başlığı */
+.content-header {
+    padding: 1.5rem 0;
+    border-bottom: 2px solid #e9ecef;
+    margin-bottom: 2rem;
+}
+
+.content-header h1 {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Kart stilleri */
+.card {
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+.card-header {
+    border-radius: 10px 10px 0 0 !important;
+    padding: 1rem 1.5rem;
+}
+
+.card-header h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+/* Form elementleri */
+.form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.form-label i {
+    color: #007bff;
+}
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.input-group-text {
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    font-weight: 600;
+    color: #495057;
+}
+
+.form-text {
+    color: #6c757d;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* Fiyat önizleme stilleri */
+.pricing-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.price-example {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+.price-example:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.price-example .branches {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.price-example .price {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+/* Formül kutusu */
+.formula-info {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.formula-box {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 6px;
+    border-left: 4px solid #007bff;
+    margin-top: 0.75rem;
+}
+
+.formula-box code {
+    color: #495057;
+    font-size: 0.875rem;
+    word-wrap: break-word;
+}
+
+/* Buton stilleri */
+.btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Alert stilleri */
+.alert {
+    border-radius: 8px;
+    border: none;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Responsive tasarım */
+@media (max-width: 992px) {
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    .content-header {
+        padding: 1rem 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .price-example {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+}

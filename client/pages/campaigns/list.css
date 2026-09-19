@@ -1,0 +1,65 @@
+.campaign-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 0;
+    overflow: hidden;
+    transition: box-shadow .2s;
+}
+.campaign-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+.campaign-card.inactive { opacity: .6; }
+
+.campaign-card-img {
+    width: 140px;
+    min-width: 140px;
+    height: 100px;
+    background: #f8f9fa;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.campaign-card-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+.no-img {
+    display: flex; align-items: center; justify-content: center;
+    height: 100%; color: #adb5bd; font-size: 2rem;
+}
+
+.campaign-card-body { flex: 1; padding: 12px 0; }
+.campaign-card-actions {
+    display: flex; gap: 6px;
+    padding: 0 16px;
+    flex-shrink: 0;
+}
+
+/* Resim yükleme kutusu */
+.img-upload-box {
+    width: 100%;
+    height: 200px;
+    border: 2px dashed #dee2e6;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    overflow: hidden;
+    transition: border-color .2s;
+}
+.img-upload-box:hover { border-color: #0d6efd; background: #f0f4ff; }
+.img-upload-box img { width:100%; height:100%; object-fit:cover; }
+
+/* Lang tabs */
+.nav-tabs-sm .nav-link {
+    padding: 4px 12px;
+    font-size: .85rem;
+}
+.lang-tab-pane { background: #f8f9fa; }
+
+/* Empty state */
+.empty-state { color: #adb5bd; }

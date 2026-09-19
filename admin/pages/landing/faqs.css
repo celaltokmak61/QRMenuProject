@@ -1,0 +1,18 @@
+.handle {
+    cursor: move;
+    color: #6c757d;
+}
+
+.accordion-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #f8f9fa;
+}
+
+.sortable-ghost {
+    opacity: 0.4;
+}

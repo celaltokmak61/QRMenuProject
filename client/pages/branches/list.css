@@ -1,0 +1,362 @@
+/* ==============================================
+   Şube Yönetimi - Liste Sayfası Stilleri
+   - Card tasarımları
+   - Branch bilgileri
+   - Modal stilleri
+   - Responsive düzenlemeler
+============================================== */
+
+/* Ana İçerik Alanı */
+.main-content {
+    padding: 30px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.content-wrapper {
+    max-width: 1400px;
+}
+
+/* Şube Kartları */
+.branch-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.branch-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+/* Pasif şube */
+.branch-card.inactive {
+    opacity: 0.6;
+}
+
+.branch-card.inactive .card-header {
+    background-color: #6c757d !important;
+}
+
+/* Kart Başlığı */
+.branch-card .card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px 20px;
+    border: none;
+}
+
+.branch-card .card-header h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Status Toggle */
+.branch-card .form-switch .form-check-input {
+    width: 45px;
+    height: 22px;
+    cursor: pointer;
+    background-color: rgba(255,255,255,0.3);
+    border: 2px solid rgba(255,255,255,0.5);
+}
+
+.branch-card .form-switch .form-check-input:checked {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+/* Kart Gövdesi */
+.branch-card .card-body {
+    padding: 20px;
+    min-height: 180px;
+}
+
+/* Logo */
+.branch-logo {
+    text-align: center;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.branch-logo img {
+    max-height: 80px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* Şube Bilgileri */
+.branch-info {
+    display: flex;
+    align-items: start;
+    font-size: 0.9rem;
+    color: #495057;
+    line-height: 1.4;
+}
+
+.branch-info i {
+    width: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* Sosyal Medya Linkleri */
+.social-links {
+    display: flex;
+    gap: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e9ecef;
+}
+
+.social-links a {
+    font-size: 1.3rem;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: scale(1.2);
+    color: #667eea !important;
+}
+
+/* Kart Footer */
+.branch-card .card-footer {
+    background-color: #f8f9fa;
+    border: none;
+    padding: 15px;
+}
+
+.branch-card .btn-group {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.branch-card .btn-group .btn {
+    border: none;
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    font-weight: 500;
+}
+
+.branch-card .btn-group .btn i {
+    font-size: 0.9rem;
+}
+
+/* Boş Durum */
+.alert-info {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    border-radius: 12px;
+}
+
+.alert-info .text-muted {
+    color: rgba(255,255,255,0.8) !important;
+}
+
+.alert-info h4 {
+    font-weight: 600;
+}
+
+/* Limit Uyarısı */
+.alert-warning {
+    border-left: 4px solid #ffc107;
+    background-color: #fff3cd;
+}
+
+/* Modal Stilleri */
+.modal-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+}
+
+.modal-header .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+.modal-body h6 {
+    color: #667eea;
+    font-weight: 600;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.modal-footer {
+    border: none;
+    padding: 15px 25px;
+    background-color: #f8f9fa;
+}
+
+/* Form Stilleri */
+.form-label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 8px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.input-group-text {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+    font-weight: 500;
+}
+
+/* Mevcut Logo Önizleme */
+#currentLogo {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#currentLogo img {
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Buton Stilleri */
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:disabled {
+    background: #6c757d;
+    opacity: 0.6;
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 15px;
+    }
+    
+    .branch-card .btn-group .btn {
+        font-size: 0.75rem;
+        padding: 6px 8px;
+    }
+    
+    .branch-card .btn-group .btn i {
+        display: block;
+        margin: 0;
+        font-size: 1rem;
+    }
+    
+    .branch-card .btn-group .btn span {
+        display: none;
+    }
+    
+    .modal-dialog {
+        margin: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .branch-card .card-header h5 {
+        font-size: 0.95rem;
+    }
+    
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .d-flex.justify-content-between button {
+        width: 100%;
+    }
+}
+
+/* Loading State */
+.btn.loading {
+    position: relative;
+    color: transparent !important;
+}
+
+.btn.loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spinner 0.6s linear infinite;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Başarı ve Hata Mesajları */
+.alert {
+    border-radius: 8px;
+    border: none;
+    padding: 15px 20px;
+}
+
+.alert i {
+    margin-right: 8px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Animasyonlar */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.branch-card {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* Her kart için delay ekle */
+.branch-card:nth-child(1) { animation-delay: 0s; }
+.branch-card:nth-child(2) { animation-delay: 0.1s; }
+.branch-card:nth-child(3) { animation-delay: 0.2s; }
+.branch-card:nth-child(4) { animation-delay: 0.3s; }
+.branch-card:nth-child(5) { animation-delay: 0.4s; }
+.branch-card:nth-child(6) { animation-delay: 0.5s; }

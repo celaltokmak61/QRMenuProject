@@ -1,0 +1,239 @@
+# ==============================================
+# QR MENÜ SİSTEMİ - HTACCESS KONFIGÜRASYONU
+# ==============================================
+
+# RewriteEngine'i aktifleştir
+RewriteEngine On
+RewriteBase /LokmaQR/
+
+# ==============================================
+# MENÜ TEMİZ URL KURALLARI
+# /menu/2/              -> menu/index.php?branch=2
+# /menu/2/products/4/  -> menu/products.php?branch=2&category=4
+# /menu/2/product/15/  -> menu/product-detail.php?branch=2&product=15
+# ==============================================
+
+# Ürün detay: /menu/2/product/15/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^menu/([0-9]+)/product/([0-9]+)/?$ menu/product-detail.php?branch=$1&product=$2 [L,QSA]
+
+# Kategori ürünleri: /menu/2/products/4/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^menu/([0-9]+)/products/([0-9]+)/?$ menu/products.php?branch=$1&category=$2 [L,QSA]
+
+# Menü ana sayfa: /menu/2/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^menu/([0-9]+)/?$ menu/index.php?branch=$1 [L,QSA]
+
+# Dil değiştirme: /menu/2/lang/en/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^menu/([0-9]+)/lang/([a-z]{2})/?$ menu/index.php?branch=$1&lang=$2 [L,QSA]
+
+# ==============================================
+# SUBDOMAIN YÖNLENDİRME
+# ==============================================
+
+# Admin paneli yönlendirmesi (admin.domain.com -> /admin)
+RewriteCond %{HTTP_HOST} ^admin\.(.+)$ [NC]
+RewriteCond %{REQUEST_URI} !^/admin
+RewriteRule ^(.*)$ /admin/$1 [L]
+
+# localhost/admin erişimini engelle (sadece admin.localhost kullan)
+# XAMPP testleri için geçici olarak devre dışı
+# RewriteCond %{HTTP_HOST} ^localhost$ [NC]
+# RewriteCond %{REQUEST_URI} ^/admin [NC]
+# RewriteRule ^(.*)$ / [R=302,L]
+
+# Müşteri paneli yönlendirmesi (firmaadi.domain.com -> /client)
+# IP adresleri ve localhost hariç, www ve admin dışı subdomain'ler
+RewriteCond %{HTTP_HOST} !^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+(:[0-9]+)?$ [NC]
+RewriteCond %{HTTP_HOST} ^([^.]+)\.(.+)$ [NC]
+RewriteCond %1 !^admin$ [NC]
+RewriteCond %1 !^www$ [NC]
+RewriteCond %{REQUEST_URI} !^/client
+RewriteCond %{REQUEST_URI} !^/api [NC]
+RewriteRule ^(.*)$ /client/$1?subdomain=%1 [L,QSA]
+
+# ==============================================
+# HTTPS YÖNLENDİRMESİ (Production için)
+# ==============================================
+# Production'da açılacak, XAMPP'de kapalı
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# ==============================================
+# WWW YÖNLENDİRMESİ (İsteğe bağlı)
+# ==============================================
+# www'siz kullanmak için:
+# RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+# RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# ==============================================
+# DİZİN LİSTELEMESİNİ ENGELLE
+# ==============================================
+Options -Indexes
+
+# ==============================================
+# DOSYA ERİŞİM GÜVENLİĞİ
+# ==============================================
+
+# .htaccess ve .htpasswd dosyalarına erişimi engelle
+<Files ~ "^\.ht">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# config.php dosyasına doğrudan erişimi engelle
+<Files "config.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# .git klasörüne erişimi engelle
+RedirectMatch 404 /\.git
+
+# ==============================================
+# PHP AYARLARI
+# ==============================================
+
+# PHP versiyonu (Hosting'de gerekirse değiştirilir)
+# AddHandler application/x-httpd-php74 .php
+
+# Hata gösterimini kapat (JSON çıktısını bozmamak için)
+php_flag display_errors Off
+php_flag log_errors On
+
+# Maksimum dosya yükleme boyutu
+php_value upload_max_filesize 10M
+php_value post_max_size 10M
+
+# Maksimum çalışma süresi
+php_value max_execution_time 300
+php_value max_input_time 300
+
+# Memory limit
+php_value memory_limit 256M
+
+# ==============================================
+# HATA SAYFALARI
+# ==============================================
+
+# Özel hata sayfaları
+ErrorDocument 404 /errors/404.html
+ErrorDocument 403 /errors/403.html
+ErrorDocument 500 /errors/500.html
+
+# ==============================================
+# CACHE KONTROL (Performans için)
+# ==============================================
+
+# Tarayıcı cache'i aktifleştir
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Resimler - 1 ay
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    
+    # CSS ve JavaScript - 1 hafta
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType text/javascript "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    
+    # Fontlar - 1 ay
+    ExpiresByType font/woff "access plus 1 month"
+    ExpiresByType font/woff2 "access plus 1 month"
+    ExpiresByType application/font-woff "access plus 1 month"
+    ExpiresByType application/font-woff2 "access plus 1 month"
+    
+    # HTML - 1 saat
+    ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+# ==============================================
+# GZIP SIKIŞTIRMA (Performans için)
+# ==============================================
+
+<IfModule mod_deflate.c>
+    # HTML, CSS, JavaScript, Text, XML sıkıştır
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/json
+</IfModule>
+
+# ==============================================
+# GÜVENLİK BAŞLIKLARI
+# ==============================================
+
+<IfModule mod_headers.c>
+    # XSS koruması
+    Header set X-XSS-Protection "1; mode=block"
+    
+    # Content-Type sniffing'i engelle
+    Header set X-Content-Type-Options "nosniff"
+    
+    # Clickjacking koruması
+    Header set X-Frame-Options "SAMEORIGIN"
+    
+    # Referrer policy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Content Security Policy (Production'da daha katı olabilir)
+    # Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"
+</IfModule>
+
+# ==============================================
+# CHARSET AYARI
+# ==============================================
+
+# Varsayılan charset UTF-8
+AddDefaultCharset UTF-8
+
+# ==============================================
+# CORS AYARLARI (API için)
+# ==============================================
+
+# API istekleri için CORS başlıkları
+<IfModule mod_headers.c>
+    SetEnvIf Origin "^http(s)?://(.+\.)?(localhost|yourdomain\.com)$" AccessControlAllowOrigin=$0
+    Header set Access-Control-Allow-Origin %{AccessControlAllowOrigin}e env=AccessControlAllowOrigin
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization, X-API-Key"
+</IfModule>
+
+# ==============================================
+# DOSYA UZANTILARI ENGELLEME
+# ==============================================
+
+# Hassas dosya uzantılarına erişimi engelle
+<FilesMatch "\.(sql|log|bak|backup|inc|ini|conf)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# ==============================================
+# MOD_REWRITE NOTLARI
+# ==============================================
+
+# XAMPP'de çalışması için:
+# 1. httpd.conf dosyasında mod_rewrite aktif olmalı
+# 2. AllowOverride All olmalı
+# 3. Apache restart edilmeli
+
+# Production'da çalışması için:
+# 1. Hosting wildcard subdomain desteklemeli
+# 2. DNS ayarlarında *.domain.com A kaydı olmalı
+# 3. Wildcard SSL sertifikası kurulu olmalı

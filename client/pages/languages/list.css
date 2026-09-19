@@ -1,0 +1,361 @@
+/* ==============================================
+   Dil Yönetimi - Liste Sayfası Stilleri
+   - Dil kartları
+   - İstatistik kutuları
+   - Modal stilleri
+   - Responsive düzenlemeler
+============================================== */
+
+/* Ana İçerik */
+.main-content {
+    padding: 30px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.content-wrapper {
+    max-width: 1400px;
+}
+
+/* ─── Bilgi Kutusu ─────────────────────────────── */
+.info-box {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.info-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    border-radius: 8px;
+    background: #f8f9fa;
+}
+
+.info-card i {
+    font-size: 2rem;
+    width: 48px;
+    text-align: center;
+}
+
+.info-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    line-height: 1.2;
+}
+
+.info-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ─── Dil Kartları ─────────────────────────────── */
+.language-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    height: 100%;
+}
+
+.language-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* Varsayılan dil kartı */
+.language-card.default-lang {
+    border: 2px solid #ffc107;
+}
+
+.language-card.default-lang .card-header {
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+}
+
+/* Pasif dil kartı */
+.language-card.inactive {
+    opacity: 0.6;
+}
+
+/* Kart Başlığı */
+.language-card .card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px 20px;
+    border: none;
+}
+
+.lang-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lang-flag {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.lang-name {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.lang-code {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Status Toggle */
+.language-card .form-switch .form-check-input {
+    width: 42px;
+    height: 20px;
+    cursor: pointer;
+    background-color: rgba(255,255,255,0.3);
+    border: 2px solid rgba(255,255,255,0.5);
+}
+
+.language-card .form-switch .form-check-input:checked {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+/* Kart Gövdesi */
+.language-card .card-body {
+    padding: 20px;
+    min-height: 140px;
+}
+
+/* Çeviri İstatistikleri */
+.translation-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stats-loading {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.stats-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+.stats-label {
+    color: #6c757d;
+}
+
+.stats-value {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Progress Bar (çeviri tamamlanma oranı) */
+.translation-progress {
+    margin-top: 8px;
+}
+
+.translation-progress .progress {
+    height: 6px;
+    border-radius: 3px;
+    background-color: #e9ecef;
+}
+
+.translation-progress .progress-bar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 3px;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #6c757d;
+    margin-bottom: 4px;
+}
+
+/* Kart Footer */
+.language-card .card-footer {
+    background-color: #f8f9fa;
+    border: none;
+    padding: 15px;
+}
+
+/* ─── Butonlar ─────────────────────────────────── */
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #5a70d4 0%, #6a3d93 100%);
+}
+
+/* ─── Modal Stilleri ───────────────────────────── */
+.modal-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+}
+
+.modal-header .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+.modal-footer {
+    border: none;
+    padding: 15px 25px;
+    background-color: #f8f9fa;
+}
+
+/* Hızlı Dil Butonları */
+.quick-lang-btn {
+    text-align: left !important;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    padding: 8px 12px;
+}
+
+.quick-lang-btn:not(:disabled):hover {
+    background-color: #667eea;
+    border-color: #667eea;
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Divider */
+.divider-text {
+    text-align: center;
+    position: relative;
+    margin: 20px 0;
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+.divider-text::before,
+.divider-text::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: #dee2e6;
+}
+
+.divider-text::before { left: 0; }
+.divider-text::after  { right: 0; }
+
+/* Form Stilleri */
+.form-label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 6px;
+}
+
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* ─── Çeviri Progress Modal ────────────────────── */
+.translate-animation i {
+    animation: pulse 1.5s ease infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1);    opacity: 1; }
+    50%       { transform: scale(1.15); opacity: 0.8; }
+}
+
+/* ─── Boş Durum ────────────────────────────────── */
+.alert-info {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    border-radius: 12px;
+}
+
+.alert-info .text-muted {
+    color: rgba(255,255,255,0.8) !important;
+}
+
+/* ─── Uyarı Mesajları ──────────────────────────── */
+.alert {
+    border-radius: 8px;
+    border: none;
+    padding: 15px 20px;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+    color: #856404;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* ─── Animasyonlar ─────────────────────────────── */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.language-card {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* ─── Responsive ───────────────────────────────── */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 15px;
+    }
+
+    .info-card {
+        padding: 10px;
+    }
+
+    .info-value {
+        font-size: 1.2rem;
+    }
+
+    .modal-dialog {
+        margin: 10px;
+    }
+
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .d-flex.justify-content-between .btn {
+        width: 100%;
+    }
+}

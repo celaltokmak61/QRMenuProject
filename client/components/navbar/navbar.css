@@ -1,0 +1,155 @@
+/**
+ * ==============================================
+ * CLIENT NAVBAR STİLLERİ
+ * ==============================================
+ * - Üst menü çubuğu temel stiller
+ * - Floating bayraklı dil seçici (FAZA 12)
+ *   admin/components/navbar/navbar.css'den adapt
+ * ==============================================
+ */
+
+/* ==============================================
+   CLIENT FLOATING DİL SEÇİCİ
+   ============================================== */
+
+.client-floating-lang {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.25rem;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 1050;
+}
+
+.client-lang-float-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: none;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.20);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    overflow: hidden;
+}
+
+.client-lang-float-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.28);
+}
+
+.client-lang-btn-flag {
+    width: 30px;
+    height: 22px;
+    object-fit: cover;
+    border-radius: 2px;
+    display: block;
+}
+
+.client-lang-float-panel {
+    position: absolute;
+    bottom: calc(100% + 0.65rem);
+    right: 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    min-width: 190px;
+    padding: 0.4rem 0;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1060;
+    animation: clientLangPanelIn 0.18s ease;
+}
+
+.client-lang-float-panel.open {
+    display: flex;
+}
+
+@keyframes clientLangPanelIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.client-lang-panel-header {
+    padding: 0.55rem 1rem 0.4rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #8a8fa8;
+    border-bottom: 1px solid #f0f0f4;
+    margin-bottom: 0.2rem;
+}
+
+.client-lang-panel-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.55rem 1rem;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    transition: background 0.12s ease;
+    text-decoration: none;
+    color: #333;
+}
+
+.client-lang-panel-item:hover {
+    background: #f5f6fa;
+    color: #333;
+    text-decoration: none;
+}
+
+.client-lang-panel-item.active {
+    background: #e8f4fd;
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+.client-lang-panel-flag {
+    width: 26px;
+    height: 19px;
+    object-fit: cover;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.client-lang-panel-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.client-lang-panel-name {
+    font-size: 0.85rem;
+}
+
+.client-lang-panel-code {
+    font-size: 0.68rem;
+    color: #aaa;
+    font-family: monospace;
+}
+
+.client-lang-panel-item.active .client-lang-panel-code {
+    color: #6ea8fe;
+}
+
+.client-lang-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1049;
+    display: none;
+}
+
+.client-lang-backdrop.open {
+    display: block;
+}

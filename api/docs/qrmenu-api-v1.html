@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Menu API v1 — Documentation</title>
+    <style>
+        :root {
+            --primary:   #4f46e5;
+            --primary-d: #3730a3;
+            --success:   #059669;
+            --warning:   #d97706;
+            --danger:    #dc2626;
+            --info:      #0284c7;
+            --bg:        #0f172a;
+            --bg2:       #1e293b;
+            --bg3:       #334155;
+            --text:      #e2e8f0;
+            --text-muted:#94a3b8;
+            --border:    #334155;
+            --code-bg:   #0d1117;
+            --radius:    8px;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            display: flex;
+        }
+
+        /* ── Sidebar ──────────────────────────── */
+        .sidebar {
+            width: 260px;
+            min-width: 260px;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            background: var(--bg2);
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            padding: 0 0 2rem;
+        }
+        .sidebar-logo {
+            padding: 1.5rem 1.25rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .sidebar-logo h1 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+        .sidebar-logo p { font-size: .75rem; color: var(--text-muted); margin-top: .25rem; }
+        .sidebar-version {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            font-size: .65rem;
+            font-weight: 700;
+            padding: .1rem .45rem;
+            border-radius: 20px;
+            margin-left: .25rem;
+            vertical-align: middle;
+        }
+        .sidebar nav { padding: .75rem 0; }
+        .nav-section {
+            padding: .5rem 1.25rem .25rem;
+            font-size: .65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--text-muted);
+        }
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .4rem 1.25rem;
+            font-size: .82rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color .15s, background .15s;
+            border-radius: 0;
+        }
+        .nav-item:hover { color: var(--text); background: var(--bg3); }
+        .nav-item.active { color: #fff; background: var(--primary); }
+        .nav-item .badge-method {
+            font-size: .6rem;
+            font-weight: 700;
+            padding: .1rem .35rem;
+            border-radius: 3px;
+            color: #fff;
+        }
+        .m-get  { background: var(--success); }
+        .m-post { background: var(--primary); }
+        .m-put  { background: var(--warning); }
+        .m-del  { background: var(--danger); }
+
+        /* ── Main Content ─────────────────────── */
+        .main {
+            flex: 1;
+            min-width: 0;
+            padding: 2.5rem 3rem 4rem;
+            max-width: 900px;
+        }
+
+        /* ── Sections ─────────────────────────── */
+        section { margin-bottom: 3.5rem; }
+        section:target { scroll-margin-top: 1rem; }
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+            padding-bottom: .75rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+        }
+        h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 1.5rem 0 .75rem;
+        }
+        p { color: var(--text-muted); margin-bottom: .75rem; }
+
+        /* ── Endpoint Card ────────────────────── */
+        .endpoint {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        .endpoint-header {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            padding: .85rem 1.25rem;
+            cursor: pointer;
+            user-select: none;
+        }
+        .endpoint-header:hover { background: var(--bg3); }
+        .method-badge {
+            font-size: .72rem;
+            font-weight: 700;
+            padding: .25rem .6rem;
+            border-radius: 4px;
+            min-width: 52px;
+            text-align: center;
+            color: #fff;
+        }
+        .endpoint-path {
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: .88rem;
+            color: #fff;
+            flex: 1;
+        }
+        .endpoint-desc {
+            font-size: .78rem;
+            color: var(--text-muted);
+        }
+        .endpoint-body {
+            border-top: 1px solid var(--border);
+            padding: 1.25rem;
+        }
+        .endpoint-body.hidden { display: none; }
+
+        /* ── Code Block ───────────────────────── */
+        pre, code {
+            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+        }
+        pre {
+            background: var(--code-bg);
+            border: 1px solid #21262d;
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            overflow-x: auto;
+            font-size: .8rem;
+            line-height: 1.6;
+            color: #e6edf3;
+            margin: .75rem 0;
+        }
+        code:not(pre code) {
+            background: rgba(99,102,241,.15);
+            color: #a5b4fc;
+            padding: .1rem .35rem;
+            border-radius: 3px;
+            font-size: .82rem;
+        }
+
+        /* ── Table ────────────────────────────── */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .82rem;
+            margin: .75rem 0;
+        }
+        th {
+            background: var(--bg3);
+            color: var(--text-muted);
+            font-size: .7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            padding: .5rem .75rem;
+            text-align: left;
+        }
+        td {
+            padding: .55rem .75rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+        }
+        tr:last-child td { border-bottom: none; }
+        .param-required { color: var(--danger); font-size: .7rem; font-weight: 700; }
+        .param-optional { color: var(--text-muted); font-size: .7rem; }
+        .param-type { color: #7dd3fc; font-family: monospace; font-size: .78rem; }
+
+        /* ── Alert / Callout ──────────────────── */
+        .callout {
+            border-radius: var(--radius);
+            padding: .85rem 1.1rem;
+            margin: .75rem 0;
+            display: flex;
+            gap: .75rem;
+            align-items: flex-start;
+            font-size: .83rem;
+        }
+        .callout-info  { background: rgba(2,132,199,.12); border: 1px solid rgba(2,132,199,.35); }
+        .callout-warn  { background: rgba(217,119,6,.12); border: 1px solid rgba(217,119,6,.35); }
+        .callout-tip   { background: rgba(5,150,105,.12); border: 1px solid rgba(5,150,105,.35); }
+        .callout-icon  { font-size: 1rem; line-height: 1.4; flex-shrink: 0; }
+        .callout-content p { margin-bottom: 0; color: var(--text); }
+
+        /* ── Status Code Badge ────────────────── */
+        .status {
+            display: inline-block;
+            font-size: .72rem;
+            font-weight: 700;
+            padding: .15rem .5rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .s200 { background: rgba(5,150,105,.2); color: #34d399; }
+        .s201 { background: rgba(99,102,241,.2); color: #a5b4fc; }
+        .s400 { background: rgba(217,119,6,.2);  color: #fbbf24; }
+        .s401 { background: rgba(220,38,38,.2);  color: #f87171; }
+        .s404 { background: rgba(220,38,38,.2);  color: #f87171; }
+        .s429 { background: rgba(217,119,6,.2);  color: #fbbf24; }
+        .s500 { background: rgba(100,116,139,.2);color: #94a3b8; }
+
+        /* ── Tab Switcher ─────────────────────── */
+        .tabs { display: flex; gap: .25rem; margin-bottom: -.5rem; }
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: .78rem;
+            padding: .4rem .8rem;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            border: 1px solid transparent;
+            border-bottom: none;
+            transition: all .15s;
+        }
+        .tab-btn.active {
+            background: var(--code-bg);
+            color: #fff;
+            border-color: #21262d;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* ── Hero Header ──────────────────────── */
+        .hero {
+            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 60%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .hero h1 { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: .5rem; }
+        .hero .tagline { color: #a5b4fc; font-size: 1.05rem; }
+        .hero .meta { display: flex; gap: 1.5rem; margin-top: 1.25rem; flex-wrap: wrap; }
+        .meta-item { font-size: .78rem; color: var(--text-muted); }
+        .meta-item strong { color: var(--text); }
+
+        /* ── Syntax Highlight ─────────────────── */
+        .kw  { color: #ff7b72; }   /* keyword */
+        .str { color: #a5d6ff; }   /* string */
+        .num { color: #f2cc60; }   /* number */
+        .key { color: #7ee787; }   /* json key */
+        .cmt { color: #6e7681; }   /* comment */
+        .url { color: #79c0ff; }   /* url */
+
+        /* ── Responsive ───────────────────────── */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; position: static; }
+            .main { padding: 1.5rem 1rem 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SIDEBAR NAVIGATION
+════════════════════════════════════════════════════════════════════ -->
+<aside class="sidebar">
+    <div class="sidebar-logo">
+        <h1>⬡ QR Menu API <span class="sidebar-version">v1</span></h1>
+        <p>REST API Reference</p>
+    </div>
+    <nav>
+        <div class="nav-section">Getting Started</div>
+        <a class="nav-item active" href="#overview">Overview</a>
+        <a class="nav-item" href="#authentication">Authentication</a>
+        <a class="nav-item" href="#rate-limiting">Rate Limiting</a>
+        <a class="nav-item" href="#errors">Error Handling</a>
+
+        <div class="nav-section">Public Endpoints</div>
+        <a class="nav-item" href="#menu-overview">
+            <span class="badge-method m-get">GET</span>/menu/{username}
+        </a>
+        <a class="nav-item" href="#menu-categories">
+            <span class="badge-method m-get">GET</span>/menu/{username}/categories
+        </a>
+        <a class="nav-item" href="#menu-products">
+            <span class="badge-method m-get">GET</span>/menu/{username}/products
+        </a>
+        <a class="nav-item" href="#menu-product-detail">
+            <span class="badge-method m-get">GET</span>/menu/{username}/products/{id}
+        </a>
+
+        <div class="nav-section">Categories (Auth)</div>
+        <a class="nav-item" href="#cat-list">
+            <span class="badge-method m-get">GET</span>/categories
+        </a>
+        <a class="nav-item" href="#cat-create">
+            <span class="badge-method m-post">POST</span>/categories
+        </a>
+        <a class="nav-item" href="#cat-detail">
+            <span class="badge-method m-get">GET</span>/categories/{id}
+        </a>
+        <a class="nav-item" href="#cat-update">
+            <span class="badge-method m-put">PUT</span>/categories/{id}
+        </a>
+        <a class="nav-item" href="#cat-delete">
+            <span class="badge-method m-del">DEL</span>/categories/{id}
+        </a>
+
+        <div class="nav-section">Products (Auth)</div>
+        <a class="nav-item" href="#prod-list">
+            <span class="badge-method m-get">GET</span>/products
+        </a>
+        <a class="nav-item" href="#prod-create">
+            <span class="badge-method m-post">POST</span>/products
+        </a>
+        <a class="nav-item" href="#prod-detail">
+            <span class="badge-method m-get">GET</span>/products/{id}
+        </a>
+        <a class="nav-item" href="#prod-update">
+            <span class="badge-method m-put">PUT</span>/products/{id}
+        </a>
+        <a class="nav-item" href="#prod-delete">
+            <span class="badge-method m-del">DEL</span>/products/{id}
+        </a>
+
+        <div class="nav-section">Reference</div>
+        <a class="nav-item" href="#status-codes">HTTP Status Codes</a>
+        <a class="nav-item" href="#data-models">Data Models</a>
+        <a class="nav-item" href="#changelog">Changelog</a>
+    </nav>
+</aside>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════════════════════════════════════ -->
+<main class="main">
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1>QR Menu REST API</h1>
+        <p class="tagline">Integrate your digital menu into any application</p>
+        <div class="meta">
+            <div class="meta-item">Version: <strong>v1.0</strong></div>
+            <div class="meta-item">Base URL: <strong>https://yourdomain.com/api/v1</strong></div>
+            <div class="meta-item">Format: <strong>JSON</strong></div>
+            <div class="meta-item">Rate Limit: <strong>150 req/min</strong></div>
+        </div>
+    </div>
+
+    <!-- ── Overview ───────────────────────────────────────── -->
+    <section id="overview">
+        <h2>🌐 Overview</h2>
+        <p>The QR Menu API gives you programmatic access to your digital menu data. You can read your menu publicly (no authentication required) or manage categories and products with an API key.</p>
+
+        <div class="callout callout-info">
+            <span class="callout-icon">ℹ️</span>
+            <div class="callout-content">
+                <p><strong>Base URL:</strong> <code>https://yourdomain.com/api/v1</code><br>
+                All requests and responses use <strong>JSON</strong> format with UTF-8 encoding.</p>
+            </div>
+        </div>
+
+        <h3>Quick Test</h3>
+        <pre><span class="cmt"># Verify the API is reachable (no authentication required)</span>
+curl https://yourdomain.com/api/v1/</pre>
+        <pre>{
+  <span class="key">"success"</span>: <span class="kw">true</span>,
+  <span class="key">"name"</span>: <span class="str">"QR Menu RESTful API"</span>,
+  <span class="key">"version"</span>: <span class="str">"v1"</span>
+}</pre>
+    </section>
+
+    <!-- ── Authentication ─────────────────────────────────── -->
+    <section id="authentication">
+        <h2>🔐 Authentication</h2>
+        <p>Most write operations and all management endpoints require an API key. Generate keys from your dashboard under <strong>API Settings</strong>.</p>
+        <p>API keys begin with the prefix <code>qrm_</code> followed by a 48-character random hex string (total 52 characters).</p>
+
+        <h3>Option 1 — Authorization Header (recommended)</h3>
+        <pre>GET /api/v1/categories HTTP/1.1
+Host: yourdomain.com
+<span class="key">Authorization: Bearer qrm_a1b2c3d4e5f6...</span>
+Content-Type: application/json</pre>
+
+        <h3>Option 2 — Query Parameter</h3>
+        <pre>GET /api/v1/categories<span class="str">?api_key=qrm_a1b2c3d4e5f6...</span> HTTP/1.1</pre>
+
+        <div class="callout callout-warn">
+            <span class="callout-icon">⚠️</span>
+            <div class="callout-content">
+                <p><strong>Security:</strong> Always use the Authorization header in production. Query parameters may appear in server logs.</p>
+            </div>
+        </div>
+
+        <h3>Invalid Key Response</h3>
+        <pre>{
+  <span class="key">"success"</span>: <span class="kw">false</span>,
+  <span class="key">"error"</span>: <span class="str">"Invalid API key."</span>,
+  <span class="key">"code"</span>: <span class="num">401</span>
+}</pre>
+    </section>
+
+    <!-- ── Rate Limiting ──────────────────────────────────── -->
+    <section id="rate-limiting">
+        <h2>⏱ Rate Limiting</h2>
+        <p>Each API key is limited to <strong>150 requests per minute</strong>. Rate limit counters reset on a rolling 60-second window.</p>
+
+        <h3>Response Headers</h3>
+        <table>
+            <thead><tr><th>Header</th><th>Description</th></tr></thead>
+            <tbody>
+                <tr><td><code>X-RateLimit-Limit</code></td><td>Maximum requests allowed per minute</td></tr>
+                <tr><td><code>X-RateLimit-Remaining</code></td><td>Requests remaining in current window</td></tr>
+                <tr><td><code>X-RateLimit-Reset</code></td><td>Unix timestamp when the window resets</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Rate Limit Exceeded (429)</h3>
+        <pre>{
+  <span class="key">"success"</span>: <span class="kw">false</span>,
+  <span class="key">"error"</span>: <span class="str">"Rate limit exceeded. Max 150 requests per minute."</span>,
+  <span class="key">"code"</span>: <span class="num">429</span>,
+  <span class="key">"retry_after"</span>: <span class="num">34</span>
+}</pre>
+
+        <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <div class="callout-content">
+                <p>Implement exponential backoff when you receive a 429 response. Use <code>retry_after</code> to know how many seconds to wait.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Errors ──────────────────────────────────────────── -->
+    <section id="errors">
+        <h2>⚠️ Error Handling</h2>
+        <p>All error responses follow the same structure:</p>
+        <pre>{
+  <span class="key">"success"</span>: <span class="kw">false</span>,
+  <span class="key">"error"</span>: <span class="str">"Human-readable error message"</span>,
+  <span class="key">"code"</span>: <span class="num">400</span>
+}</pre>
+        <table>
+            <thead><tr><th>Code</th><th>Meaning</th><th>Common Cause</th></tr></thead>
+            <tbody>
+                <tr><td><span class="status s400">400</span></td><td>Bad Request</td><td>Missing or invalid parameters</td></tr>
+                <tr><td><span class="status s401">401</span></td><td>Unauthorized</td><td>Missing, invalid or disabled API key</td></tr>
+                <tr><td><span class="status s404">404</span></td><td>Not Found</td><td>Resource or endpoint does not exist</td></tr>
+                <tr><td><span class="status s429">429</span></td><td>Too Many Requests</td><td>Rate limit exceeded</td></tr>
+                <tr><td><span class="status s500">500</span></td><td>Server Error</td><td>Unexpected internal error</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         PUBLIC ENDPOINTS — MENU
+    ════════════════════════════════════════════════════ -->
+    <section id="menu-overview">
+        <h2>🍽 Public Menu Endpoints</h2>
+        <p>These endpoints are publicly accessible. No API key required. Ideal for embedding menus in websites or mobile apps.</p>
+
+        <!-- GET /menu/{username} -->
+        <div class="endpoint" id="ep-menu-overview">
+            <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                <span class="method-badge m-get">GET</span>
+                <span class="endpoint-path">/api/v1/menu/{username}</span>
+                <span class="endpoint-desc">Full menu overview — branches, categories and products</span>
+                <span style="color:var(--text-muted);font-size:.8rem;margin-left:auto">▾</span>
+            </div>
+            <div class="endpoint-body">
+                <p>Returns the complete menu including all branches, categories and products for the given username.</p>
+
+                <h3>Path Parameters</h3>
+                <table>
+                    <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td><code>username</code></td>
+                            <td><span class="param-type">string</span></td>
+                            <td><span class="param-required">Required</span></td>
+                            <td>Subdomain/username of the restaurant (e.g. <code>myrestaurant</code>)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Query Parameters</h3>
+                <table>
+                    <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>lang</code></td><td><span class="param-type">string</span></td><td><code>tr</code></td><td>Language code for translations (e.g. <code>en</code>, <code>de</code>)</td></tr>
+                        <tr><td><code>branch_id</code></td><td><span class="param-type">integer</span></td><td>all</td><td>Filter by a specific branch ID</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Example Request</h3>
+                <pre>curl <span class="url">https://yourdomain.com/api/v1/menu/myrestaurant</span> \
+     -H <span class="str">"Accept: application/json"</span></pre>
+
+                <h3>Example Response</h3>
+                <pre>{
+  <span class="key">"success"</span>: <span class="kw">true</span>,
+  <span class="key">"user"</span>: {
+    <span class="key">"username"</span>: <span class="str">"myrestaurant"</span>,
+    <span class="key">"company_name"</span>: <span class="str">"My Restaurant"</span>
+  },
+  <span class="key">"branches"</span>: [
+    {
+      <span class="key">"id"</span>: <span class="num">1</span>,
+      <span class="key">"name"</span>: <span class="str">"Main Branch"</span>,
+      <span class="key">"address"</span>: <span class="str">"123 Main St"</span>,
+      <span class="key">"phone"</span>: <span class="str">"+90 212 000 0000"</span>,
+      <span class="key">"categories"</span>: [
+        {
+          <span class="key">"id"</span>: <span class="num">12</span>,
+          <span class="key">"name"</span>: <span class="str">"Starters"</span>,
+          <span class="key">"image"</span>: <span class="str">"https://..."</span>,
+          <span class="key">"products"</span>: [...]
+        }
+      ]
+    }
+  ],
+  <span class="key">"meta"</span>: { <span class="key">"total_branches"</span>: <span class="num">1</span>, <span class="key">"lang"</span>: <span class="str">"en"</span> }
+}</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- GET /menu/{username}/categories -->
+    <section id="menu-categories">
+        <div class="endpoint">
+            <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                <span class="method-badge m-get">GET</span>
+                <span class="endpoint-path">/api/v1/menu/{username}/categories</span>
+                <span class="endpoint-desc">List categories for a specific branch</span>
+                <span style="color:var(--text-muted);font-size:.8rem;margin-left:auto">▾</span>
+            </div>
+            <div class="endpoint-body">
+                <p>Returns all active categories for the given restaurant. Optionally filter by branch and language.</p>
+
+                <h3>Query Parameters</h3>
+                <table>
+                    <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>lang</code></td><td><span class="param-type">string</span></td><td><code>tr</code></td><td>Language code for translations</td></tr>
+                        <tr><td><code>branch_id</code></td><td><span class="param-type">integer</span></td><td>all</td><td>Filter categories assigned to a specific branch</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Example Request</h3>
+                <pre>curl <span class="url">https://yourdomain.com/api/v1/menu/myrestaurant/categories?lang=en&branch_id=1</span></pre>
+
+                <h3>Example Response</h3>
+                <pre>{
+  <span class="key">"success"</span>: <span class="kw">true</span>,
+  <span class="key">"categories"</span>: [
+    {
+      <span class="key">"id"</span>: <span class="num">12</span>,
+      <span class="key">"name"</span>: <span class="str">"Starters"</span>,
+      <span class="key">"description"</span>: <span class="str">"Light bites to begin"</span>,
+      <span class="key">"image"</span>: <span class="str">"https://..."</span>,
+      <span class="key">"order_number"</span>: <span class="num">1</span>
+    }
+  ],
+  <span class="key">"meta"</span>: { <span class="key">"total"</span>: <span class="num">5</span>, <span class="key">"lang"</span>: <span class="str">"en"</span> }
+}</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- GET /menu/{username}/products -->
+    <section id="menu-products">
+        <div class="endpoint">
+            <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                <span class="method-badge m-get">GET</span>
+                <span class="endpoint-path">/api/v1/menu/{username}/products</span>
+                <span class="endpoint-desc">List products for a specific branch / category</span>
+                <span style="color:var(--text-muted);font-size:.8rem;margin-left:auto">▾</span>
+            </div>
+            <div class="endpoint-body">
+                <h3>Query Parameters</h3>
+                <table>
+                    <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>lang</code></td><td><span class="param-type">string</span></td><td><code>tr</code></td><td>Language code</td></tr>
+                        <tr><td><code>branch_id</code></td><td><span class="param-type">integer</span></td><td>all</td><td>Filter by branch</td></tr>
+                        <tr><td><code>category_id</code></td><td><span class="param-type">integer</span></td><td>all</td><td>Filter by category</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Example Response</h3>
+                <pre>{
+  <span class="key">"success"</span>: <span class="kw">true</span>,
+  <span class="key">"products"</span>: [
+    {
+      <span class="key">"id"</span>: <span class="num">55</span>,
+      <span class="key">"name"</span>: <span class="str">"Hummus"</span>,
+      <span class="key">"description"</span>: <span class="str">"Creamy chickpea dip"</span>,
+      <span class="key">"image"</span>: <span class="str">"https://..."</span>,
+      <span class="key">"price"</span>: <span class="num">45.00</span>,
+      <span class="key">"currency"</span>: <span class="str">"TRY"</span>,
+      <span class="key">"is_available"</span>: <span class="kw">true</span>,
+      <span class="key">"category_id"</span>: <span class="num">12</span>,
+      <span class="key">"allergens"</span>: [<span class="str">"sesame"</span>]
+    }
+  ],
+  <span class="key">"meta"</span>: { <span class="key">"total"</span>: <span class="num">24</span>, <span class="key">"lang"</span>: <span class="str">"en"</span> }
+}</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- GET /menu/{username}/products/{id} -->
+    <section id="menu-product-detail">
+        <div class="endpoint">
+            <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                <span class="method-badge m-get">GET</span>
+                <span class="endpoint-path">/api/v1/menu/{username}/products/{id}</span>
+                <span class="endpoint-desc">Single product detail</span>
+                <span style="color:var(--text-muted);font-size:.8rem;margin-left:auto">▾</span>
+            </div>
+            <div class="endpoint-body">
+                <h3>Path Parameters</h3>
+                <table>
+                    <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>username</code></td><td><span class="param-type">string</span></td><td>Restaurant username</td></tr>
+                        <tr><td><code>id</code></td><td><span class="param-type">integer</span></td><td>Product ID</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Example Response</h3>
+                <pre>{
+  <span class="key">"success"</span>: <span class="kw">true</span>,
+  <span class="key">"product"</span>: {
+    <span class="key">"id"</span>: <span class="num">55</span>,
+    <span class="key">"name"</span>: <span class="str">"Hummus"</span>,
+    <span class="key">"description"</span>: <span class="str">"Creamy chickpea dip with olive oil"</span>,
+    <span class="key">"price"</span>: <span class="num">45.00</span>,
+    <span class="key">"currency"</span>: <span class="str">"TRY"</span>,
+    <span class="key">"image"</span>: <span class="str">"https://..."</span>,
+    <span class="key">"is_available"</span>: <span class="kw">true</span>,
+    <span class="key">"category"</span>: { <span class="key">"id"</span>: <span class="num">12</span>, <span class="key">"name"</span>: <span class="str">"Starters"</span> },
+    <span class="key">"branch_prices"</span>: [
+      { <span class="key">"branch_id"</span>: <span class="num">1</span>, <span class="key">"price"</span>: <span class="num">45.00</span> },
+      { <span class="key">"branch_id"</span>: <span class="num">2</span>, <span class="key">"price"</span>: <span class="num">50.00</span> }
+    ],
+    <span class="key">"allergens"</span>: [<span class="str">"sesame"</span>],
+    <span class="key">"translations"</span>: {
+      <span class="key">"en"</span>: { <span class="key">"name"</span>: <span class="str">"Hummus"</span>, <span class="key">"description"</span>: <span class="str">"Creamy chickpea dip"</span> }
+    }
+  }
+}</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         CATEGORIES (Auth Required)
+    ════════════════════════════════════════════════════ -->
+    <section id="cat-list">
+        <h2>📂 Categories</h2>
+        <p>Manage your menu categories. All endpoints require authentication.</p>
+
+        <div class="endpoint">
+            <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                <span class="method-badge m-get">GET</span>
+                <span class="endpoint-path">/api/v1/categories</span>
+                <span class="endpoint-desc">List all categories</span>
+                <span style="color:var(--text-muted);font-size:.8rem;margin-left:auto">▾</span>
+            </div>
+            <div class="endpoint-body">
+                <h3>Query Parameters</h3>
+                <table>
+                    <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>branch_id</code></td><td><span class="param-type">integer</span></td><td>all</td><td>Filter by branch</td></tr>
+                        <tr><td><code>with_products</code></td><td><span class="param-type">boolean</span></td><td><code>0</code></td><td>Include products in each category</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Example Request</h3>
+                <pre>curl <span class="url">https://yourdomain.com/api/v1/categories?with_products=1</span> \
+     -H <span class="str">"Authorization: Bearer qrm_xxxxxxxx"</span></pre>
+
+                <h3>Example Response</h3>
+                <pre>{
+  <span class="key">"success"</span>: <span class="kw">true</span>,
+  <span class="key">"categories"</span>: [
+    {
+      <span class="key">"id"</span>: <span class="num">12</span>,
+      <span class="key">"name"</span>: <span class="str">"Starters"</span>,
+      <span class="key">"description"</span>: <span class="str">"Light bites"</span>,
+      <span class="key">"image"</span>: <span class="str">"https://..."</span>,
+      <span class="key">"is_active"</span>: <span class="kw">true</span>,
+      <span class="key">"order_number"</span>: <span class="num">1</span>,
+      <span class="key">"product_count"</span>: <span class="num">8</span>
+    }
+  ],
+  <span class="key">"meta"</span>: { <span class="key">"total"</span>: <span class="num">5</span> }
+}</pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="cat-create">
+        <div class="endpoint">
+            <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                <span class="method-badge m-post">POST</span>
+                <span class="endpoint-path">/api/v1/categories</span>
+                <span class="endpoint-desc">Create a new category</span>
+                <span style="color:var(--text-muted);font-size:.8rem;margin-left:auto">▾</span>
+            </div>
+            <div class="endpoint-body">
+                <h3>Request Body</h3>
+                <table>
+                    <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>name</code></td><td><span class="param-type">string</span></td><td><span class="param-required">Required</span></td><td>Category name (max 255 chars)</td></tr>
+                        <tr><td><code>description</code></td><td><span class="param-type">string</span></td><td><span class="param-optional">Optional</span></td><td>Category description</td></tr>
+                        <tr><td><code>order_number</code></td><td><span class="param-type">integer</span></td><td><span class="param-optional">Optional</span></td><td>Display order (default: 0)</td></tr>
+                        <tr><td><code>is_active</code></td><td><span class="param-type">boolean</span></td><td><span class="param-optional">Optional</span></td><td>Active state (default: true)</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Example Request</h3>
+                <pre>curl -X POST <span class="url">https://yourdomain.com/api/v1/categories</span> \
+     -H <span class="str">"Authorization: Bearer qrm_xxxxxxxx"</span> \
+     -H <span class="str">"Content-Type: application/json"</span> \
+     -d '{
+       <span class="key">"name"</span>: <span class="str">"Desserts"</span>,
+       <span class="key">"description"</span>: <span class="str">"Sweet treats"</span>,
+       <span class="key">"order_number"</span>: <span class="num">5</span>
+     }'</pre>
+
+                <h3>Response <span class="status s201">201 Created</span></h3>
+                <pre>{
+  <span class="key">"success"</span>: <span class="kw">true</span>,
+  <span class="key">"message"</span>: <span class="str">"Category created successfully."</span>,
+  <span class="key">"id"</span>: <span class="num">18</span>
+}</pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="cat-detail">
+        <div class="endpoint">
+            <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                <span class="method-badge m-get">GET</span>
+                <span class="endpoint-path">/api/v1/categories/{id}</span>
+                <span class="endpoint-desc">Get a single category</span>
+                <span style="color:var(--text-muted);font-size:.8rem;margin-left:auto">▾</span>
+            </div>
+            <div class="endpoint-body">
+                <p>Returns details for a single category. Add <code>?with_products=1</code> to include associated products.</p>
+                <pre>curl <span class="url">https://yourdomain.com/api/v1/categories/12?with_products=1</span> \
+     -H <span class="str">"Authorization: Bearer qrm_xxxxxxxx"</span></pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="cat-update">
+        <div class="endpoint">
+            <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                <span class="method-badge m-put">PUT</span>
+                <span class="endpoint-path">/api/v1/categories/{id}</span>
+                <span class="endpoint-desc">Update a category</span>
+                <span style="color:var(--text-muted);font-size:.8rem;margin-left:auto">▾</span>
+            </div>
+            <div class="endpoint-body">
+                <p>Partial updates are supported — only include the fields you want to change.</p>
+                <pre>curl -X PUT <span class="url">https://yourdomain.com/api/v1/categories/12</span> \
+     -H <span class="str">"Authorization: Bearer qrm_xxxxxxxx"</span> \
+     -H <span class="str">"Content-Type: application/json"</span> \
+     -d '{ <span class="key">"name"</span>: <span class="str">"Appetizers"</span>, <span class="key">"is_active"</span>: <span class="kw">true</span> }'</pre>
+                <h3>Response <span class="status s200">200 OK</span></h3>
+                <pre>{
+  <span class="key">"success"</span>: <span class="kw">true</span>,
+  <span class="key">"message"</span>: <span class="str">"Category updated successfully."</span>
+}</pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="cat-delete">
+        <div class="endpoint">
+            <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                <span class="method-badge m-del">DEL</span>
+                <span class="endpoint-path">/api/v1/categories/{id}</span>
+                <span class="endpoint-desc">Delete a category</span>
+                <span style="color:var(--text-muted);font-size:.8rem;margin-left:auto">▾</span>
+            </div>
+            <div class="endpoint-body">
+                <div class="callout callout-warn">
+                    <span class="callout-icon">⚠️</span>
+                    <div class="callout-content"><p>Deleting a category is permanent. Associated products will remain but will no longer be linked to this category.</p></div>
+                </div>
+                <pre>curl -X DELETE <span class="url">https://yourdomain.com/api/v1/categories/12</span> \
+     -H <span class="str">"Authorization: Bearer qrm_xxxxxxxx"</span></pre>
+                <h3>Response <span class="status s200">200 OK</span></h3>
+                <pre>{ <span class="key">"success"</span>: <span class="kw">true</span>, <span class="key">"message"</span>: <span class="str">"Category deleted."</span> }</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         PRODUCTS (Auth Required)
+    ════════════════════════════════════════════════════ -->
+    <section id="prod-list">
+        <h2>🛒 Products</h2>
+        <p>Manage your menu products. All endpoints require authentication.</p>
+
+        <div class="endpoint">
+            <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                <span class="method-badge m-get">GET</span>
+                <span class="endpoint-path">/api/v1/products</span>
+                <span class="endpoint-desc">List all products</span>
+                <span style="color:var(--text-muted);font-size:.8rem;margin-left:auto">▾</span>
+            </div>
+            <div class="endpoint-body">
+                <h3>Query Parameters</h3>
+                <table>
+                    <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>category_id</code></td><td><span class="param-type">integer</span></td><td>all</td><td>Filter by category</td></tr>
+                        <tr><td><code>branch_id</code></td><td><span class="param-type">integer</span></td><td>all</td><td>Filter by branch</td></tr>
+                        <tr><td><code>with_prices</code></td><td><span class="param-type">boolean</span></td><td><code>0</code></td><td>Include branch-specific prices</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Example Response</h3>
+                <pre>{
+  <span class="key">"success"</span>: <span class="kw">true</span>,
+  <span class="key">"products"</span>: [
+    {
+      <span class="key">"id"</span>: <span class="num">55</span>,
+      <span class="key">"name"</span>: <span class="str">"Hummus"</span>,
+      <span class="key">"description"</span>: <span class="str">"Chickpea dip"</span>,
+      <span class="key">"price"</span>: <span class="num">45.00</span>,
+      <span class="key">"currency"</span>: <span class="str">"TRY"</span>,
+      <span class="key">"category_id"</span>: <span class="num">12</span>,
+      <span class="key">"is_available"</span>: <span class="kw">true</span>,
+      <span class="key">"image"</span>: <span class="str">"https://..."</span>
+    }
+  ],
+  <span class="key">"meta"</span>: { <span class="key">"total"</span>: <span class="num">42</span> }
+}</pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="prod-create">
+        <div class="endpoint">
+            <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                <span class="method-badge m-post">POST</span>
+                <span class="endpoint-path">/api/v1/products</span>
+                <span class="endpoint-desc">Create a new product</span>
+                <span style="color:var(--text-muted);font-size:.8rem;margin-left:auto">▾</span>
+            </div>
+            <div class="endpoint-body">
+                <h3>Request Body</h3>
+                <table>
+                    <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>name</code></td><td><span class="param-type">string</span></td><td><span class="param-required">Required</span></td><td>Product name</td></tr>
+                        <tr><td><code>category_id</code></td><td><span class="param-type">integer</span></td><td><span class="param-required">Required</span></td><td>Parent category ID</td></tr>
+                        <tr><td><code>price</code></td><td><span class="param-type">number</span></td><td><span class="param-required">Required</span></td><td>Default price</td></tr>
+                        <tr><td><code>description</code></td><td><span class="param-type">string</span></td><td><span class="param-optional">Optional</span></td><td>Product description</td></tr>
+                        <tr><td><code>is_available</code></td><td><span class="param-type">boolean</span></td><td><span class="param-optional">Optional</span></td><td>Availability (default: true)</td></tr>
+                        <tr><td><code>order_number</code></td><td><span class="param-type">integer</span></td><td><span class="param-optional">Optional</span></td><td>Display order (default: 0)</td></tr>
+                        <tr><td><code>branch_prices</code></td><td><span class="param-type">array</span></td><td><span class="param-optional">Optional</span></td><td>Per-branch prices: <code>[{branch_id, price}]</code></td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Example Request</h3>
+                <pre>curl -X POST <span class="url">https://yourdomain.com/api/v1/products</span> \
+     -H <span class="str">"Authorization: Bearer qrm_xxxxxxxx"</span> \
+     -H <span class="str">"Content-Type: application/json"</span> \
+     -d '{
+       <span class="key">"name"</span>: <span class="str">"Baklava"</span>,
+       <span class="key">"category_id"</span>: <span class="num">18</span>,
+       <span class="key">"price"</span>: <span class="num">85.00</span>,
+       <span class="key">"description"</span>: <span class="str">"Layers of pastry, honey and nuts"</span>,
+       <span class="key">"branch_prices"</span>: [
+         { <span class="key">"branch_id"</span>: <span class="num">1</span>, <span class="key">"price"</span>: <span class="num">85.00</span> },
+         { <span class="key">"branch_id"</span>: <span class="num">2</span>, <span class="key">"price"</span>: <span class="num">90.00</span> }
+       ]
+     }'</pre>
+
+                <h3>Response <span class="status s201">201 Created</span></h3>
+                <pre>{
+  <span class="key">"success"</span>: <span class="kw">true</span>,
+  <span class="key">"message"</span>: <span class="str">"Product created successfully."</span>,
+  <span class="key">"id"</span>: <span class="num">72</span>
+}</pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="prod-detail">
+        <div class="endpoint">
+            <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                <span class="method-badge m-get">GET</span>
+                <span class="endpoint-path">/api/v1/products/{id}</span>
+                <span class="endpoint-desc">Get a single product</span>
+                <span style="color:var(--text-muted);font-size:.8rem;margin-left:auto">▾</span>
+            </div>
+            <div class="endpoint-body">
+                <p>Returns full product details. Add <code>?with_prices=1</code> to include branch-specific pricing.</p>
+                <pre>curl <span class="url">https://yourdomain.com/api/v1/products/55?with_prices=1</span> \
+     -H <span class="str">"Authorization: Bearer qrm_xxxxxxxx"</span></pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="prod-update">
+        <div class="endpoint">
+            <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                <span class="method-badge m-put">PUT</span>
+                <span class="endpoint-path">/api/v1/products/{id}</span>
+                <span class="endpoint-desc">Update a product</span>
+                <span style="color:var(--text-muted);font-size:.8rem;margin-left:auto">▾</span>
+            </div>
+            <div class="endpoint-body">
+                <p>Partial updates are supported.</p>
+                <pre>curl -X PUT <span class="url">https://yourdomain.com/api/v1/products/55</span> \
+     -H <span class="str">"Authorization: Bearer qrm_xxxxxxxx"</span> \
+     -H <span class="str">"Content-Type: application/json"</span> \
+     -d '{ <span class="key">"price"</span>: <span class="num">49.90</span>, <span class="key">"is_available"</span>: <span class="kw">false</span> }'</pre>
+                <h3>Response <span class="status s200">200 OK</span></h3>
+                <pre>{ <span class="key">"success"</span>: <span class="kw">true</span>, <span class="key">"message"</span>: <span class="str">"Product updated successfully."</span> }</pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="prod-delete">
+        <div class="endpoint">
+            <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                <span class="method-badge m-del">DEL</span>
+                <span class="endpoint-path">/api/v1/products/{id}</span>
+                <span class="endpoint-desc">Delete a product</span>
+                <span style="color:var(--text-muted);font-size:.8rem;margin-left:auto">▾</span>
+            </div>
+            <div class="endpoint-body">
+                <pre>curl -X DELETE <span class="url">https://yourdomain.com/api/v1/products/55</span> \
+     -H <span class="str">"Authorization: Bearer qrm_xxxxxxxx"</span></pre>
+                <h3>Response <span class="status s200">200 OK</span></h3>
+                <pre>{ <span class="key">"success"</span>: <span class="kw">true</span>, <span class="key">"message"</span>: <span class="str">"Product deleted."</span> }</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Status Codes ──────────────────────────────────── -->
+    <section id="status-codes">
+        <h2>📊 HTTP Status Codes</h2>
+        <table>
+            <thead><tr><th>Code</th><th>Status</th><th>Description</th></tr></thead>
+            <tbody>
+                <tr><td><span class="status s200">200</span></td><td>OK</td><td>Request succeeded</td></tr>
+                <tr><td><span class="status s201">201</span></td><td>Created</td><td>Resource created successfully</td></tr>
+                <tr><td><span class="status s400">400</span></td><td>Bad Request</td><td>Validation error or missing required field</td></tr>
+                <tr><td><span class="status s401">401</span></td><td>Unauthorized</td><td>Missing, invalid, or disabled API key</td></tr>
+                <tr><td><span class="status s404">404</span></td><td>Not Found</td><td>Resource or endpoint does not exist</td></tr>
+                <tr><td><span class="status s429">429</span></td><td>Too Many Requests</td><td>Rate limit exceeded (150 req/min)</td></tr>
+                <tr><td><span class="status s500">500</span></td><td>Internal Server Error</td><td>Unexpected server-side error</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- ── Data Models ───────────────────────────────────── -->
+    <section id="data-models">
+        <h2>🗄 Data Models</h2>
+
+        <h3>Category Object</h3>
+        <pre>{
+  <span class="key">"id"</span>:           <span class="num">12</span>,          <span class="cmt">// integer — unique identifier</span>
+  <span class="key">"name"</span>:         <span class="str">"Starters"</span>,  <span class="cmt">// string  — translated if lang param used</span>
+  <span class="key">"description"</span>:  <span class="str">"..."</span>,       <span class="cmt">// string|null</span>
+  <span class="key">"image"</span>:        <span class="str">"https://..."</span>,<span class="cmt">// string|null — full URL</span>
+  <span class="key">"order_number"</span>: <span class="num">1</span>,          <span class="cmt">// integer — display order</span>
+  <span class="key">"is_active"</span>:    <span class="kw">true</span>,       <span class="cmt">// boolean</span>
+  <span class="key">"product_count"</span>:<span class="num">8</span>           <span class="cmt">// integer — only with with_products=1</span>
+}</pre>
+
+        <h3>Product Object</h3>
+        <pre>{
+  <span class="key">"id"</span>:           <span class="num">55</span>,
+  <span class="key">"name"</span>:         <span class="str">"Hummus"</span>,
+  <span class="key">"description"</span>:  <span class="str">"Creamy chickpea dip"</span>,
+  <span class="key">"price"</span>:        <span class="num">45.00</span>,       <span class="cmt">// float — default/base price</span>
+  <span class="key">"currency"</span>:     <span class="str">"TRY"</span>,
+  <span class="key">"image"</span>:        <span class="str">"https://..."</span>,
+  <span class="key">"is_available"</span>: <span class="kw">true</span>,
+  <span class="key">"order_number"</span>: <span class="num">1</span>,
+  <span class="key">"category_id"</span>:  <span class="num">12</span>,
+  <span class="key">"allergens"</span>:    [<span class="str">"sesame"</span>, <span class="str">"gluten"</span>],
+  <span class="key">"branch_prices"</span>:[         <span class="cmt">// only with with_prices=1</span>
+    { <span class="key">"branch_id"</span>: <span class="num">1</span>, <span class="key">"price"</span>: <span class="num">45.00</span> }
+  ]
+}</pre>
+
+        <h3>Branch Object</h3>
+        <pre>{
+  <span class="key">"id"</span>:          <span class="num">1</span>,
+  <span class="key">"name"</span>:        <span class="str">"Main Branch"</span>,
+  <span class="key">"address"</span>:     <span class="str">"123 Main St, Istanbul"</span>,
+  <span class="key">"phone"</span>:       <span class="str">"+90 212 000 0000"</span>,
+  <span class="key">"is_active"</span>:   <span class="kw">true</span>
+}</pre>
+    </section>
+
+    <!-- ── Changelog ────────────────────────────────────── -->
+    <section id="changelog">
+        <h2>📋 Changelog</h2>
+        <table>
+            <thead><tr><th>Version</th><th>Date</th><th>Changes</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>v1.0</strong></td>
+                    <td>April 2026</td>
+                    <td>Initial release — menu, categories, products endpoints; Bearer auth; rate limiting (150 req/min)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-tip" style="margin-top:1.5rem">
+            <span class="callout-icon">💡</span>
+            <div class="callout-content">
+                <p><strong>Need help?</strong> Contact support or visit your dashboard API Settings page to manage your keys.</p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<script>
+function toggleEndpoint(header) {
+    const body = header.nextElementSibling;
+    const arrow = header.querySelector('span:last-child');
+    body.classList.toggle('hidden');
+    arrow.textContent = body.classList.contains('hidden') ? '▸' : '▾';
+}
+
+// Sidebar active link tracking
+document.addEventListener('DOMContentLoaded', () => {
+    const navItems = document.querySelectorAll('.nav-item');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = '#' + entry.target.id;
+                navItems.forEach(a => {
+                    a.classList.toggle('active', a.getAttribute('href') === id);
+                });
+            }
+        });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+});
+</script>
+</body>
+</html>

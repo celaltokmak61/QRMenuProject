@@ -1,0 +1,803 @@
+/* ============================================================
+   Çeviri Yönetimi - Stiller
+   ============================================================ */
+
+/* ── Genel Sayfa ── */
+.main-content {
+    background: #f8f9fa;
+    min-height: 100vh;
+}
+
+.content-wrapper {
+    padding: 0 20px 40px;
+    max-width: 1400px;
+}
+
+/* ── Dil Sekmeleri ── */
+.lang-tabs-wrapper {
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 16px 20px 12px;
+}
+
+.lang-tabs {
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.lang-tab {
+    border: 2px solid #e9ecef;
+    border-radius: 20px !important;
+    padding: 6px 16px;
+    font-size: 0.875rem;
+    color: #495057;
+    background: #f8f9fa;
+    transition: all 0.2s;
+    text-decoration: none;
+}
+
+.lang-tab:hover {
+    border-color: #0d6efd;
+    color: #0d6efd;
+    background: #e7f1ff;
+}
+
+.lang-tab.active {
+    background: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff !important;
+}
+
+.flag-emoji {
+    font-size: 1.1rem;
+}
+
+/* ── Özet Kart ── */
+.summary-card {
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    box-shadow: 0 1px 4px rgba(0,0,0,.05);
+}
+
+.summary-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 160px;
+}
+
+.summary-progress-wrap {
+    flex: 1;
+    min-width: 80px;
+    max-width: 180px;
+}
+
+.summary-progress {
+    height: 8px !important;
+    border-radius: 10px !important;
+    background: #e9ecef;
+}
+
+.summary-progress .progress-bar {
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+.summary-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #343a40;
+    white-space: nowrap;
+}
+
+.summary-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.summary-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.18s;
+    user-select: none;
+}
+
+.summary-pill.pill-all {
+    background: #f0f1f3;
+    color: #495057;
+    border-color: #e0e2e6;
+}
+
+.summary-pill.pill-all.active,
+.summary-pill.pill-all:hover {
+    background: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+}
+
+.summary-pill.pill-ok {
+    background: #f0faf3;
+    color: #198754;
+    border-color: #d1f2d9;
+}
+
+.summary-pill.pill-ok.active,
+.summary-pill.pill-ok:hover {
+    background: #198754;
+    border-color: #198754;
+    color: #fff;
+}
+
+.summary-pill.pill-warn {
+    background: #fffaf0;
+    color: #856404;
+    border-color: #fde8a0;
+}
+
+.summary-pill.pill-warn.active,
+.summary-pill.pill-warn:hover {
+    background: #ffc107;
+    border-color: #ffc107;
+    color: #212529;
+}
+
+/* ── Arama Kutusu ── */
+.search-bar .input-group {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.search-bar .input-group-text {
+    border: none;
+    background: #fff;
+}
+
+.search-bar .form-control {
+    border: none;
+    font-size: 0.9rem;
+    padding-left: 4px;
+}
+
+.search-bar .form-control:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.search-bar .btn-outline-secondary {
+    border: none;
+    border-left: 1px solid #dee2e6;
+    border-radius: 0;
+}
+
+/* ── Çeviri Listesi Container ── */
+#translationsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* ── Loading ── */
+.translation-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 20px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+}
+
+/* ── Tek Çeviri Satırı ── */
+.translation-row {
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-left: 3px solid transparent;
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.translation-row:hover {
+    border-color: #c3d8ff;
+    border-left-color: #86b7fe;
+    box-shadow: 0 2px 8px rgba(13, 110, 253, 0.07);
+}
+
+.translation-row.is-modified {
+    border-left-color: #ffc107;
+    background: #fffdf0;
+}
+
+.translation-row.is-saved {
+    border-left-color: #198754;
+}
+
+.translation-row.is-missing {
+    border-left-color: #dee2e6;
+}
+
+/* ── Satır: Durum İkonu ── */
+.row-status {
+    flex-shrink: 0;
+}
+
+/* ── Satır: Etiket ── */
+.row-label {
+    flex: 0 0 260px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+/* Kullanıcıya gösterilen isim (teknik key değil) */
+.tr-display-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #212529;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    cursor: default;
+}
+
+/* Alan tipi badge — Ad / Açıklama / Malzeme */
+.tr-field-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 500;
+    padding: 1px 7px;
+    border-radius: 8px;
+    width: fit-content;
+}
+
+.tr-field-badge.field-name {
+    background: #e7f1ff;
+    color: #0a58ca;
+}
+
+.tr-field-badge.field-desc {
+    background: #f0faf3;
+    color: #198754;
+}
+
+.tr-field-badge.field-ingr {
+    background: #f3e8ff;
+    color: #6f42c1;
+}
+
+.tr-field-badge:not(.field-name):not(.field-desc):not(.field-ingr) {
+    background: #e9ecef;
+    color: #6c757d;
+}
+
+/* ── Orta: Çeviri Input ── */
+.row-middle {
+    flex: 1;
+    min-width: 0;
+}
+
+.translation-input {
+    width: 100%;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 7px 11px;
+    font-size: 0.875rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #f8f9fa;
+    resize: none;
+    min-height: 38px;
+}
+
+.translation-input:focus {
+    border-color: #86b7fe;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, .15);
+    background: #fff;
+}
+
+.translation-input.has-value {
+    background: #fff;
+}
+
+.translation-input.auto-translated {
+    border-color: #a8d5a2;
+    background: #f4fff4;
+}
+
+/* ── Sağ: Aksiyonlar ── */
+.row-right {
+    flex: 0 0 72px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+/* Genel aksiyon butonu */
+.btn-action {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 1px solid #dee2e6;
+    border-radius: 7px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: #6c757d;
+}
+
+.btn-action:hover {
+    background: #f0f1f3;
+    border-color: #adb5bd;
+    color: #343a40;
+}
+
+.btn-action.btn-save-single:hover {
+    background: #e7f1ff;
+    border-color: #86b7fe;
+    color: #0d6efd;
+}
+
+.btn-action.btn-delete-single {
+    opacity: 0;
+    transition: opacity 0.18s, background 0.15s;
+}
+
+.btn-action.btn-delete-single:hover {
+    background: #fde8e8;
+    border-color: #f5a0a0;
+    color: #dc3545;
+}
+
+.translation-row:hover .btn-action.btn-delete-single {
+    opacity: 1;
+}
+
+/* Eski class isimleri (geriye uyumluluk) */
+.btn-save-single {
+    /* .btn-action ile aynı */
+}
+
+.btn-delete-single {
+    /* .btn-action ile aynı */
+}
+
+/* ── Load More Alanı ── */
+.btn-load-more {
+    min-width: 180px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+}
+
+.all-loaded-msg {
+    text-align: center;
+    padding: 16px;
+    font-size: 0.85rem;
+    color: #6c757d;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+    margin-top: 8px;
+}
+
+/* ── Durum İkonu ── */
+.status-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    flex-shrink: 0;
+}
+
+.status-icon.translated {
+    background: #d1f2d9;
+    color: #198754;
+}
+
+.status-icon.missing {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-icon.auto {
+    background: #cfe2ff;
+    color: #0a58ca;
+}
+
+/* ── Boş / Yükleniyor ── */
+.empty-state {
+    padding: 60px 20px;
+    text-align: center;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+}
+
+/* ── Grup Wrapper (Collapse Kapsayıcı) ── */
+.group-wrapper {
+    margin-top: 16px;
+}
+
+.group-wrapper:first-child {
+    margin-top: 0;
+}
+
+/* ── Grup Başlığı (Kategori / Ürün) ── */
+.group-wrapper .group-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: #f0f4ff;
+    border: 1px solid #dce5ff;
+    border-radius: 10px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.group-wrapper .group-header:hover {
+    background: #e5ecff;
+    border-color: #b3c8ff;
+}
+
+/* Kapalıyken başlık alt border radius tam olsun */
+.group-wrapper.collapsed .group-header {
+    margin-bottom: 0;
+    border-radius: 10px;
+}
+
+/* Grup gövdesi — collapse animasyonu */
+.group-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
+    transition: max-height 0.25s ease, opacity 0.2s ease;
+    max-height: 9999px;  /* açık hal */
+    opacity: 1;
+}
+
+.group-wrapper.collapsed .group-body {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ── Grup İçindeki Satırlar İlk/Son Radius ── */
+.group-body .translation-row:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+/* ── Chevron İkonu ── */
+.group-chevron {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: #6c757d;
+    transition: transform 0.22s ease;
+    flex-shrink: 0;
+}
+
+/* ── Grup Sayacı (X/Y) ── */
+.group-item-count {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.group-item-count.count-done {
+    background: #d1f2d9;
+    color: #155724;
+}
+
+.group-item-count.count-partial {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.group-header-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.group-header-icon.category-icon {
+    background: #dce5ff;
+    color: #3d5aed;
+}
+
+.group-header-icon.product-icon {
+    background: #e5d9ff;
+    color: #7c42d6;
+}
+
+.group-header-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #343a40;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.group-header-badge {
+    font-size: 0.75rem;
+}
+
+/* ── Grup Kontrol Butonları ── */
+.group-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-group-ctrl {
+    padding: 4px 10px;
+    font-size: 0.78rem;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    background: #fff;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-group-ctrl:hover {
+    background: #f0f4ff;
+    border-color: #b3c8ff;
+    color: #3d5aed;
+}
+
+/* ── Toplu Kaydet Butonu (sticky) ── */
+#saveAllBtn {
+    position: relative;
+}
+
+/* ── Eski class temizliği ── */
+.translation-toolbar,
+.row-left,
+.translation-label,
+.translation-key,
+.source-badge,
+.field-badge {
+    /* Eski sınıflar — yeni CSS tarafından ele alındı */
+}
+
+/* ── Toast ── */
+.toast {
+    min-width: 260px;
+}
+
+.toast.bg-success .toast-body {
+    color: #fff;
+}
+
+.toast.bg-danger .toast-body {
+    color: #fff;
+}
+
+.toast.bg-warning .toast-body {
+    color: #212529;
+}
+
+/* ── Mobil Uyumluluk ── */
+@media (max-width: 768px) {
+    .summary-card {
+        gap: 10px;
+    }
+
+    .row-label {
+        flex: 0 0 160px;
+    }
+
+    .translation-row {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 10px 12px;
+    }
+
+    .row-right {
+        flex: 0 0 auto;
+    }
+
+    .lang-tab {
+        font-size: 0.8rem;
+        padding: 5px 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .row-label {
+        flex: 1 0 100%;
+    }
+
+    .row-middle {
+        flex: 1 0 calc(100% - 80px);
+    }
+
+    .summary-right {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+/* ── 2. Seviye: Öğe (Ürün / Kategori) Alt-Wrapper ── */
+.item-wrapper {
+    border: 1px solid #e9ecef;
+    border-radius: 9px;
+    overflow: hidden;
+    margin-bottom: 4px;
+    background: #fff;
+}
+
+.item-wrapper:last-child {
+    margin-bottom: 0;
+}
+
+/* ── Alt-Öğe Başlığı ── */
+.item-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: #fafbff;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.item-header:hover {
+    background: #f0f4ff;
+}
+
+.item-wrapper.collapsed .item-header {
+    border-bottom-color: transparent;
+}
+
+/* ── Alt-Öğe Gövdesi (collapse) ── */
+.item-body {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: max-height 0.2s ease, opacity 0.18s ease;
+    max-height: 9999px;
+    opacity: 1;
+}
+
+.item-wrapper.collapsed .item-body {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* İçerideki satırlar arasında ince ayırıcı */
+.item-body .translation-row {
+    border-radius: 0;
+    border-left: 3px solid transparent;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid #f0f1f3;
+    margin: 0;
+}
+
+.item-body .translation-row:last-child {
+    border-bottom: none;
+}
+
+.item-body .translation-row.is-saved {
+    border-left-color: #198754;
+}
+
+.item-body .translation-row.is-missing {
+    border-left-color: #dee2e6;
+}
+
+.item-body .translation-row.is-modified {
+    border-left-color: #ffc107;
+    background: #fffdf0;
+}
+
+/* ── Alt-Öğe: İkon ── */
+.item-icon {
+    font-size: 0.72rem;
+    flex-shrink: 0;
+    width: 18px;
+    text-align: center;
+}
+
+.item-icon-cat  { color: #3d5aed; }
+.item-icon-prod { color: #7c42d6; }
+
+/* ── Alt-Öğe: Başlık Metni ── */
+.item-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #212529;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ── Alt-Öğe: Alan Sayısı İpucu ── */
+.item-field-hint {
+    font-size: 0.72rem;
+    color: #adb5bd;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ── Alt-Öğe: Sayaç ── */
+.item-count {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.item-count-done    { background: #d1f2d9; color: #155724; }
+.item-count-partial { background: #fff3cd; color: #856404; }
+
+/* ── Alt-Öğe: Chevron ── */
+.item-chevron {
+    font-size: 0.72rem;
+    color: #adb5bd;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+/* ── Kategori Bilgileri alt-öğesi — hafif farklı arka plan ── */
+.item-wrapper-cat > .item-header {
+    background: #f0f4ff;
+}
+
+.item-wrapper-cat > .item-header:hover {
+    background: #e5ecff;
+}

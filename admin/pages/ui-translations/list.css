@@ -1,0 +1,336 @@
+/**
+ * admin/pages/ui-translations/list.css
+ * Panel UI Çeviri Yönetim Sayfası — Stiller
+ * FAZA 12
+ */
+
+/* ─────────────────────────────────────────────────────────────────────────
+   GENEL LAYOUT
+───────────────────────────────────────────────────────────────────────── */
+main {
+    padding-bottom: 3rem;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   DİL LİSTESİ (SOL PANEL)
+───────────────────────────────────────────────────────────────────────── */
+#langList {
+    max-height: calc(100vh - 280px);
+    overflow-y: auto;
+}
+
+#langList .list-group-item {
+    transition: background-color 0.15s ease, color 0.15s ease;
+    border-left: 3px solid transparent;
+}
+
+#langList .list-group-item:hover:not(.active) {
+    background-color: #f8f9ff;
+    border-left-color: #6c8ebf;
+}
+
+#langList .list-group-item.active {
+    background-color: #0d6efd;
+    border-left-color: #0a58ca;
+    color: #fff;
+}
+
+#langList .list-group-item.active .text-muted {
+    color: rgba(255,255,255,0.75) !important;
+}
+
+#langList .list-group-item.active code {
+    color: rgba(255,255,255,0.9);
+}
+
+/* Dropdown trigger butonu active durumunda beyaz */
+#langList .list-group-item.active .btn-link {
+    color: rgba(255,255,255,0.85) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   ÇEVİRİ PANELİ (SAĞ)
+───────────────────────────────────────────────────────────────────────── */
+#translationPanel .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* İstatistik rozetleri */
+#statsRow .badge {
+    font-size: 0.75rem !important;
+    padding: 0.4em 0.8em;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   ÇEVİRİ SATIRI
+───────────────────────────────────────────────────────────────────────── */
+.trans-list {
+    max-height: calc(100vh - 360px);
+    overflow-y: auto;
+}
+
+.trans-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.1s ease;
+    align-items: start;
+}
+
+.trans-row:hover {
+    background-color: #f9fbff;
+}
+
+.trans-row:last-child {
+    border-bottom: none;
+}
+
+.trans-row--missing {
+    background-color: #fff8f8;
+}
+
+.trans-row--missing:hover {
+    background-color: #fff3f3;
+}
+
+/* Anahtar kolonu */
+.trans-key code {
+    font-size: 0.78rem;
+    color: #5a5f6e;
+    word-break: break-all;
+    font-family: 'Courier New', monospace;
+    background: #f0f1f3;
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+}
+
+.trans-source {
+    font-size: 0.78rem;
+    color: #888;
+    margin-top: 0.3rem;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+/* Değer kolonu */
+.trans-textarea {
+    font-size: 0.85rem;
+    resize: vertical;
+    min-height: 56px;
+    line-height: 1.5;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.trans-textarea:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.2rem rgba(13,110,253,0.15);
+}
+
+.trans-textarea.border-warning {
+    border-color: #ffc107 !important;
+    box-shadow: 0 0 0 0.15rem rgba(255,193,7,0.2);
+}
+
+.trans-textarea.border-success {
+    border-color: #198754 !important;
+    box-shadow: 0 0 0 0.15rem rgba(25,135,84,0.2);
+}
+
+/* Kaydet butonu */
+.save-one-btn {
+    font-size: 0.75rem;
+    padding: 0.2em 0.6em;
+}
+
+.btn-xs {
+    font-size: 0.75rem;
+    padding: 0.2em 0.6em;
+    line-height: 1.4;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   PAGINATION
+───────────────────────────────────────────────────────────────────────── */
+#transPager {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    padding: 0.5rem 1rem;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   PROGRESS MODAL
+───────────────────────────────────────────────────────────────────────── */
+#progressModal .modal-header {
+    background: linear-gradient(135deg, #fff3cd 0%, #fff8e1 100%);
+    border-bottom: 1px solid #ffc107;
+}
+
+#progressText {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+#progressSub {
+    font-size: 0.85rem;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   DİL EKLE MODAL
+───────────────────────────────────────────────────────────────────────── */
+#addLangModal .form-text {
+    font-size: 0.78rem;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   BOŞ DURUMLAR
+───────────────────────────────────────────────────────────────────────── */
+#noLangSelected,
+#transEmpty {
+    color: #adb5bd;
+}
+
+#noLangSelected i,
+#transEmpty i {
+    display: block;
+    margin: 0 auto 1rem;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────────────────────────────────── */
+@media (max-width: 991.98px) {
+    .trans-row {
+        grid-template-columns: 1fr;
+    }
+
+    #langList {
+        max-height: 280px;
+    }
+
+    .trans-list {
+        max-height: 400px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .trans-row {
+        padding: 0.6rem 0.75rem;
+    }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   SCROLL STİLİ
+───────────────────────────────────────────────────────────────────────── */
+#langList::-webkit-scrollbar,
+.trans-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+#langList::-webkit-scrollbar-track,
+.trans-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#langList::-webkit-scrollbar-thumb,
+.trans-list::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+
+#langList::-webkit-scrollbar-thumb:hover,
+.trans-list::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   KART BAŞLIKLARI
+───────────────────────────────────────────────────────────────────────── */
+.card-header h5 {
+    font-size: 0.95rem;
+}
+
+/* Bilgi kutusu kapat butonu */
+#infoBox .btn-close {
+    margin-left: auto;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   LANDING SEKMESİ — SOL PANEL (BUG 32)
+───────────────────────────────────────────────────────────────────────── */
+.landing-left-panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* Panel alt bölüm başlığı (Hedef Dil / İçerik Bölümü) */
+.landing-panel-section {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.landing-panel-section-header {
+    padding: 0.6rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Dil listesi içindeki öğeler */
+#landingLangList .list-group-item {
+    font-size: 0.85rem;
+    border-left: 3px solid transparent;
+    transition: background-color 0.15s, border-left-color 0.15s;
+    cursor: pointer;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+#landingLangList .list-group-item:hover:not(.active) {
+    background-color: #f0f4ff;
+    border-left-color: #0d6efd40;
+}
+
+#landingLangList .list-group-item.active {
+    background-color: #0d6efd;
+    border-left-color: #0a58ca;
+    color: #fff;
+}
+
+#landingLangList .list-group-item.active .opacity-75 {
+    opacity: 0.8 !important;
+    color: rgba(255,255,255,0.8) !important;
+}
+
+/* Bölüm listesi öğeleri */
+.landing-section-item {
+    display: flex !important;
+    align-items: center;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 0.55rem 1rem !important;
+    border-left: 3px solid transparent;
+    transition: background-color 0.15s, border-left-color 0.15s;
+}
+
+.landing-section-item:hover:not(.active) {
+    background-color: #f0f4ff;
+    border-left-color: #0d6efd40;
+}
+
+.landing-section-item.active {
+    background-color: #e8f0fe;
+    border-left-color: #0d6efd;
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+.landing-section-item .badge {
+    flex-shrink: 0;
+}

@@ -1,0 +1,376 @@
+/* =============================================================
+   client/pages/menu-design/design.css
+   FAZA 12.5 — Menü Tasarımı sayfası stilleri
+   ============================================================= */
+
+/* ── Genel içerik alanı ──────────────────────────────────────── */
+.design-content {
+    padding: 2rem 1.5rem;
+    max-width: 1400px;
+}
+
+/* ── Başlık ──────────────────────────────────────────────────── */
+.design-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.design-header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 0.25rem;
+}
+
+.design-header-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+/* ── Kart ────────────────────────────────────────────────────── */
+.design-card {
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .06);
+}
+
+.design-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.25rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    font-weight: 600;
+    font-size: 0.925rem;
+    color: #495057;
+}
+
+.design-card-header i {
+    width: 18px;
+    text-align: center;
+    color: #6c757d;
+}
+
+.design-card-body {
+    padding: 1.25rem;
+}
+
+/* ── Renk satırları ──────────────────────────────────────────── */
+.color-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f1f3f5;
+}
+
+.color-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.color-row:first-child {
+    padding-top: 0;
+}
+
+.color-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.color-info label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #343a40;
+    margin-bottom: 0.1rem;
+    cursor: default;
+}
+
+.color-info small {
+    font-size: 0.78rem;
+    color: #868e96;
+    line-height: 1.3;
+}
+
+.color-picker-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.color-input {
+    width: 42px;
+    height: 42px;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 2px;
+    cursor: pointer;
+    background: none;
+    transition: border-color .2s;
+}
+
+.color-input:hover,
+.color-input:focus {
+    border-color: #adb5bd;
+    outline: none;
+}
+
+.color-hex {
+    width: 92px;
+    font-size: 0.82rem;
+    font-family: 'Courier New', monospace;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 0.35rem 0.5rem;
+    color: #495057;
+    text-transform: uppercase;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.color-hex:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, .15);
+    outline: none;
+}
+
+.color-hex.is-invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, .15);
+}
+
+/* ── Font seçici ─────────────────────────────────────────────── */
+.font-select {
+    font-size: 0.9rem;
+}
+
+.font-preview {
+    background: #f8f9fa;
+    border: 1px dashed #dee2e6;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    color: #343a40;
+    transition: font-family .25s;
+}
+
+/* ── Radius slider ───────────────────────────────────────────── */
+.radius-slider {
+    accent-color: #0d6efd;
+}
+
+/* Düğme + Kart önizleme satırı */
+.radius-preview-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.radius-preview-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 38px;
+    background: #0d6efd;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: border-radius .2s;
+    flex-shrink: 0;
+}
+
+.radius-preview-card {
+    flex: 1;
+    height: 38px;
+    background: #f1f3f5;
+    border: 2px solid #dee2e6;
+    transition: border-radius .2s;
+}
+
+/* Logo yuvarlama önizlemesi */
+.logo-radius-preview-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.logo-radius-preview {
+    width: 64px;
+    height: 64px;
+    background: #adb5bd;
+    transition: border-radius .2s;
+}
+
+/* ── Logo konumu seçici ──────────────────────────────────────── */
+.logo-pos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.logo-pos-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 0.5rem;
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color .2s, background .2s, box-shadow .2s;
+    background: #fff;
+}
+
+.logo-pos-option:hover {
+    border-color: #adb5bd;
+    background: #f8f9fa;
+}
+
+.logo-pos-option.active {
+    border-color: #0d6efd;
+    background: #e7f1ff;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, .1);
+}
+
+.logo-pos-preview {
+    width: 60px;
+    height: 40px;
+    background: #f1f3f5;
+    border-radius: 6px;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Logo noktası (simge sembolü) */
+.logo-pos-dot {
+    width: 14px;
+    height: 14px;
+    background: #adb5bd;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+.logo-pos-left   .logo-pos-dot { align-self: flex-start; }
+.logo-pos-center .logo-pos-dot { align-self: center; }
+.logo-pos-right  .logo-pos-dot { align-self: flex-end; }
+
+.logo-pos-line {
+    height: 4px;
+    background: #dee2e6;
+    border-radius: 2px;
+}
+
+.logo-pos-line.short {
+    width: 70%;
+}
+
+.logo-pos-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #495057;
+}
+
+/* ── Önizleme alanı ──────────────────────────────────────────── */
+.preview-card { height: 100vh; display: flex; flex-direction: column; }
+
+.preview-frame-wrap {
+    height: 100vh;
+    flex: 1;
+    overflow: hidden;
+    background: #f8f9fa;
+}
+
+.preview-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+.preview-note {
+    padding: 0.6rem 1rem;
+    font-size: 0.78rem;
+    color: #6c757d;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+.preview-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px;
+    padding: 2rem;
+}
+
+/* ── Alert ───────────────────────────────────────────────────── */
+#alertBox {
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+/* ── Kaydet butonu — yükleniyor ──────────────────────────────── */
+#btnSave .spinner-border {
+    width: 1rem;
+    height: 1rem;
+    border-width: 2px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 1199.98px) {
+    .preview-card {
+        height: 480px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .design-content {
+        padding: 1rem 0.75rem;
+    }
+
+    .design-header {
+        flex-direction: column;
+    }
+
+    .design-header-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .btn-style-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .color-hex {
+        width: 80px;
+    }
+
+    .preview-card {
+        height: 400px;
+    }
+}
+
+@media (max-width: 479.98px) {
+    .logo-pos-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .color-picker-wrap {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.25rem;
+    }
+}

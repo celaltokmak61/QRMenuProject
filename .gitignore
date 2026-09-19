@@ -1,0 +1,137 @@
+# ============================================================
+# QR MENU PROJECT - .gitignore
+# Bu dosya hassas ve çalıştırılabilir kritik dosyaları hariç tutar.
+# ============================================================
+
+# ----------------------------
+# KRİTİK KONFİGÜRASYON (DB şifresi, API anahtarları)
+# ----------------------------
+config.php
+.env
+.env.local
+.env.production
+
+# ----------------------------
+# VERİTABANI DOSYALARI (Gerçek veri — asla paylaşma)
+# ----------------------------
+*.sql
+!database/schema_main.sql.example
+!database/schema_user.sql.example
+
+# ----------------------------
+# KURULUM & SETUP SCRIPTLER (Çalıştırılamaz olsun diye)
+# ----------------------------
+database/install.php
+database/setup.php
+database/setup_single_firm.php
+database/setup_flags.php
+database/setup_pricing_features.php
+database/seed_demo_data.php
+database/create_user_database.php
+database/db_diagnostic.php
+database/debug_migration.php
+database/debug_ui_translations.php
+database/migrate_all.php
+database/migrate_to_single.php
+database/fix_broken_placeholders_v2.php
+database/fix_category_branch_assignments.php
+database/fix_compliance_translation_scope.php
+database/fix_placeholder_translations.php
+database/fix_ui_translations.php
+database/fix_user_databases.php
+
+# Migration dosyaları (sadece 3 örnek bırak, geri kalan gizli)
+database/migration_add_alcohol_pork_columns.php
+database/migration_add_allergen_translations.php
+database/migration_add_api_keys.php
+database/migration_add_api_translations.php
+database/migration_add_auth_translations.php
+database/migration_add_banner_branch.php
+database/migration_add_branch_location.php
+database/migration_add_campaign_translations.php
+database/migration_add_campaigns.php
+database/migration_add_client_translations_v2.php
+database/migration_add_compliance_translations.php
+database/migration_add_dashboard_translations.php
+database/migration_add_deleted_at_branches.php
+database/migration_add_email_logs.php
+database/migration_add_email_template_settings.php
+database/migration_add_faz16_translations.php
+database/migration_add_faz17_demo_data.php
+database/migration_add_grid_span_category.php
+database/migration_add_landing_translations.php
+database/migration_add_landing_translations_table.php
+database/migration_add_landing_ui_translations.php
+database/migration_add_map_embed.php
+database/migration_add_menu_design_translations.php
+database/migration_add_menu_settings.php
+database/migration_add_missing_allergens.php
+database/migration_add_smtp_settings.php
+database/migration_add_smtp_translations.php
+database/migration_add_system_settings_translations.php
+database/migration_add_translation_scope.php
+database/migration_add_ui_translations.php
+database/migration_add_username_branch_count.php
+database/migration_fix_api_logs_schema.php
+database/migration_fix_subscriptions.php
+database/migration_setup_api_v1.php
+database/migration_add_languages.php
+
+# ----------------------------
+# VENDOR (Composer bağımlılıkları — composer install ile kurulur)
+# ----------------------------
+vendor/
+composer.lock
+
+# ----------------------------
+# YÜKLENEN DOSYALAR (Gerçek kullanıcı verileri)
+# ----------------------------
+uploads/
+!uploads/.gitkeep
+
+# ----------------------------
+# YEDEKLER (Büyük/hassas dosyalar)
+# ----------------------------
+backups/
+!backups/.gitkeep
+*.zip
+*.tar.gz
+*.tar
+
+# ----------------------------
+# DEBUG & TEST DOSYALARI
+# ----------------------------
+session_debug.php
+clear_session.php
+register.php
+*.log
+logs/
+
+# ----------------------------
+# FTP & SUNUCU DOSYALARI
+# ----------------------------
+.ftpquota
+.ftpsync
+*.bak
+
+# ----------------------------
+# IDE & OS DOSYALARI
+# ----------------------------
+.vscode/
+.idea/
+.claude/
+-p/
+*.DS_Store
+Thumbs.db
+desktop.ini
+
+# ----------------------------
+# NODE (Eğer varsa)
+# ----------------------------
+node_modules/
+
+# ----------------------------
+# TEMP DOSYALAR
+# ----------------------------
+tmp/
+temp/

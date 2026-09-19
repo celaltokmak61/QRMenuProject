@@ -1,0 +1,23 @@
+/* Özellikler Yönetimi Stilleri */
+
+.handle {
+    cursor: move;
+    color: #6c757d;
+}
+
+.table tbody tr {
+    transition: background-color 0.2s;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.sortable-ghost {
+    opacity: 0.4;
+    background-color: #e9ecef;
+}
+
+.btn-group .btn {
+    margin-right: 0.25rem;
+}

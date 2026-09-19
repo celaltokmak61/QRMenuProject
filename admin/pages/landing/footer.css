@@ -1,0 +1,12 @@
+.card-header h5 {
+    color: #495057;
+    font-weight: 600;
+}
+
+.list-group-item {
+    border-left: 3px solid #667eea;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}

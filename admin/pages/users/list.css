@@ -1,0 +1,536 @@
+/**
+ * ==============================================
+ * KULLANICI LİSTESİ SAYFA STİLLERİ
+ * ==============================================
+ * Kullanıcı yönetimi sayfası için özel stiller
+ * - İstatistik kartları
+ * - DataTable özelleştirmeleri
+ * - Modal stilleri
+ * - Responsive tasarım
+ * ==============================================
+ */
+
+/* ==============================================
+   MAIN CONTENT AREA
+============================================== */
+.main-content {
+    padding-top: 70px; /* Navbar yüksekliği kadar */
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+/* ==============================================
+   İSTATİSTİK KARTLARI
+============================================== */
+.stat-card {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+}
+
+.stat-icon {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.stat-icon.bg-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.stat-icon.bg-success {
+    background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+}
+
+.stat-icon.bg-warning {
+    background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%);
+}
+
+.stat-icon.bg-secondary {
+    background: linear-gradient(135deg, #667eea 0%, #667eea 100%);
+}
+
+.stat-info {
+    flex: 1;
+}
+
+.stat-title {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #2d3748;
+    line-height: 1;
+}
+
+/* ==============================================
+   TABLO ÖZELLEŞTİRMELERİ
+============================================== */
+.table-responsive {
+    border-radius: 0.5rem;
+}
+
+#usersTable {
+    margin-bottom: 0;
+}
+
+#usersTable thead th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+    color: #495057;
+    padding: 1rem 0.75rem;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+#usersTable tbody td {
+    padding: 0.75rem;
+    vertical-align: middle;
+}
+
+#usersTable tbody tr {
+    transition: background-color 0.15s;
+}
+
+#usersTable tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Subdomain linki */
+#usersTable a {
+    color: #007bff;
+    font-weight: 500;
+}
+
+#usersTable a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Status select özelleştirmesi */
+.status-select {
+    min-width: 100px;
+    cursor: pointer;
+    border: 1px solid #ced4da;
+    font-size: 0.875rem;
+}
+
+.status-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* Trial status - sarı */
+.status-select option[value="trial"] {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+/* Active status - yeşil */
+.status-select option[value="active"] {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+/* Passive status - gri */
+.status-select option[value="passive"] {
+    background-color: #e2e3e5;
+    color: #383d41;
+}
+
+/* ==============================================
+   BUTON GRUPLARı
+============================================== */
+.btn-group-sm .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+.btn-edit {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+    color: white;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+    color: white;
+}
+
+/* ==============================================
+   MODAL ÖZELLEŞTİRMELERİ
+============================================== */
+.modal-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+}
+
+.modal-header .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+.modal-title {
+    font-weight: 600;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    padding: 1rem 1.5rem;
+    background-color: #f8f9fa;
+}
+
+/* Form label'ları */
+.form-label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.form-label i {
+    margin-right: 0.25rem;
+    color: #6c757d;
+}
+
+/* Form geri bildirimleri */
+.form-text {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+}
+
+/* Subdomain feedback */
+#subdomainFeedback {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+#subdomainFeedback.text-success {
+    color: #28a745 !important;
+}
+
+#subdomainFeedback.text-danger {
+    color: #dc3545 !important;
+}
+
+/* Input group özelleştirmesi */
+.input-group-text {
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    color: #495057;
+    font-weight: 500;
+}
+
+/* ==============================================
+   DATATABLE ÖZELLEŞTİRMELERİ
+============================================== */
+/* DataTables wrapper */
+.dataTables_wrapper .dataTables_length {
+    margin-bottom: 1rem;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 1rem;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    margin-left: 0.5rem;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.375rem 2rem 0.375rem 0.75rem;
+    margin: 0 0.5rem;
+}
+
+/* Pagination */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 0.375rem 0.75rem;
+    margin: 0 0.125rem;
+    border-radius: 0.25rem;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white !important;
+    border: 1px solid #667eea;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white !important;
+    border: 1px solid #667eea;
+}
+
+/* Info */
+.dataTables_wrapper .dataTables_info {
+    padding-top: 1rem;
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+/* ==============================================
+   KART TASARIMI
+============================================== */
+.card {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* ==============================================
+   LOADING STATE
+============================================== */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.loading-spinner {
+    width: 3rem;
+    height: 3rem;
+    border: 0.3rem solid #f3f3f3;
+    border-top: 0.3rem solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ==============================================
+   ALERT ÖZELLEŞTİRMELERİ
+============================================== */
+.alert {
+    border-radius: 0.5rem;
+    border: none;
+    padding: 1rem 1.25rem;
+    font-weight: 500;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+    color: white;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+    color: white;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%);
+    color: white;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+/* ==============================================
+   RESPONSIVE TASARIM
+============================================== */
+@media (max-width: 768px) {
+    /* İstatistik kartları mobilde tam genişlik */
+    .stat-card {
+        margin-bottom: 1rem;
+    }
+    
+    /* Modal mobilde tam ekran */
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+    
+    .modal-dialog-lg {
+        max-width: calc(100% - 1rem);
+    }
+    
+    /* Tablo scroll */
+    .table-responsive {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* DataTables mobil ayarları */
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    
+    /* Buton grup mobilde dikey */
+    .btn-group-sm {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .btn-group-sm .btn {
+        margin-bottom: 0.25rem;
+        border-radius: 0.25rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Stat card daha kompakt */
+    .stat-card {
+        padding: 1rem;
+    }
+    
+    .stat-icon {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.25rem;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+    
+    /* Modal padding azalt */
+    .modal-body {
+        padding: 1rem;
+    }
+    
+    /* Form elemanları tam genişlik */
+    .col-md-6 {
+        margin-bottom: 1rem;
+    }
+}
+
+/* ==============================================
+   ANIMASYONLAR
+============================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stat-card,
+.card {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Hover efektleri */
+.btn {
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Focus state'leri */
+.form-control:focus,
+.form-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* ==============================================
+   HEADER BAŞLIK VE BUTON ALANI
+============================================== */
+.main-content {
+    position: relative;
+    z-index: 1;
+}
+
+.d-flex.justify-content-between {
+    position: relative;
+    z-index: 10;
+}
+
+.btn-toolbar {
+    position: relative;
+    z-index: 11;
+}
+
+/* ==============================================
+   UTILITY CLASSES
+============================================== */
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.font-weight-medium {
+    font-weight: 500;
+}
+
+.font-weight-semibold {
+    font-weight: 600;
+}
+
+/* Badge özelleştirmeleri */
+.badge {
+    padding: 0.35em 0.65em;
+    font-weight: 500;
+    border-radius: 0.25rem;
+}
